@@ -6,123 +6,251 @@
 <title>plant-2-plant — concept sketch</title>
 <style>
   :root {
-    --bg: #0e1410;
-    --panel: #141b16;
-    --ink: #e7efe5;
-    --muted: #8aa093;
-    --leaf: #6fbf73;
-    --leaf-dim: #3f7a44;
-    --accent: #ffcb6b;
-    --warn: #ff7a7a;
-    --line: #243029;
+    --bg:        #f4ecdc;
+    --bg-soft:   #ebe2cd;
+    --panel:     #fbf6ec;
+    --ink:       #2c2417;
+    --ink-soft:  #4a3d2a;
+    --muted:     #7a6a52;
+    --leaf:      #4a6b30;
+    --leaf-deep: #2f4a1e;
+    --clay:      #a8482e;
+    --ochre:     #b8862a;
+    --line:      #d6c9ad;
+    --line-soft: #e3d8be;
     --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.55; font-size: 16px; }
-  a { color: var(--leaf); }
-  header {
-    padding: 56px 32px 28px; border-bottom: 1px solid var(--line);
-    background: linear-gradient(180deg, #11221a 0%, var(--bg) 100%);
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    line-height: 1.65; font-size: 16.5px;
   }
-  header .wrap { max-width: 920px; margin: 0 auto; }
-  header h1 { margin: 0 0 8px; font-size: 40px; letter-spacing: -0.02em; }
-  header h1 .leaf { color: var(--leaf); }
-  header .tagline { color: var(--muted); margin: 0 0 18px; font-size: 18px; }
-  header .meta { color: var(--muted); font-family: var(--mono); font-size: 13px; }
+  a { color: var(--clay); text-decoration: underline; text-decoration-thickness: 1px;
+    text-underline-offset: 2px; }
+  a:hover { color: var(--leaf-deep); }
 
-  main { max-width: 920px; margin: 0 auto; padding: 36px 32px 80px; }
+  header {
+    padding: 56px 32px 28px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(ellipse at top left, #efe5cf 0%, transparent 60%),
+      var(--bg);
+  }
+  header .wrap { max-width: 880px; margin: 0 auto; }
+  nav.crumbs {
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    margin-bottom: 18px;
+  }
+  nav.crumbs a { color: var(--leaf-deep); text-decoration: none; }
+  nav.crumbs a:hover { text-decoration: underline; }
+  nav.crumbs .sep { margin: 0 8px; color: var(--line); }
+  header h1 {
+    margin: 0 0 8px; font-size: 40px; letter-spacing: -0.02em;
+    color: var(--ink); font-weight: 700;
+  }
+  header h1 .leaf { color: var(--leaf-deep); font-style: italic; }
+  header .tagline {
+    color: var(--ink-soft); margin: 0 0 18px; font-size: 18px;
+    font-style: italic;
+  }
+  header .meta {
+    color: var(--muted); font-family: var(--mono); font-size: 12.5px;
+  }
+
+  main { max-width: 880px; margin: 0 auto; padding: 36px 32px 80px; }
   section { margin: 0 0 44px; }
-  h2 { font-size: 22px; margin: 0 0 14px; padding-bottom: 8px;
-    border-bottom: 1px solid var(--line); color: var(--leaf); letter-spacing: -0.01em; }
-  h3 { font-size: 17px; margin: 22px 0 8px; color: var(--ink); }
-  p { margin: 0 0 12px; }
+  h2 {
+    font-size: 22px; margin: 0 0 14px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+    color: var(--leaf-deep); letter-spacing: -0.005em; font-weight: 700;
+  }
+  h2 .num {
+    display: inline-block; min-width: 1.6em;
+    font-family: var(--mono); font-size: 16px; color: var(--clay);
+    margin-right: 4px;
+  }
+  h3 { font-size: 17px; margin: 22px 0 8px; color: var(--ink); font-weight: 700; }
+  p { margin: 0 0 14px; }
   ul, ol { margin: 8px 0 14px 0; padding-left: 22px; }
-  li { margin: 4px 0; }
-  code { font-family: var(--mono); font-size: 0.92em; background: #1c2620; padding: 1px 5px; border-radius: 3px; color: var(--ink); }
-  pre { background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
-    padding: 14px 16px; overflow-x: auto; font-family: var(--mono); font-size: 13px; color: #d6e3d8; }
+  li { margin: 5px 0; }
+  code {
+    font-family: var(--mono); font-size: 0.92em;
+    background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+    color: var(--ink); border: 1px solid var(--line-soft);
+  }
+  pre {
+    background: var(--panel);
+    border: 1px solid var(--line-soft);
+    border-left: 3px solid var(--leaf);
+    border-radius: 4px;
+    padding: 14px 18px; overflow-x: auto;
+    font-family: var(--mono); font-size: 13px; color: var(--ink);
+    line-height: 1.5;
+  }
   .muted { color: var(--muted); }
+
+  /* Inline citation links */
+  a.cite {
+    display: inline-block;
+    font-family: var(--mono); font-size: 11.5px;
+    background: var(--bg-soft); color: var(--leaf-deep);
+    padding: 0 5px; border-radius: 3px;
+    margin: 0 1px; vertical-align: 1px;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    transition: background 0.1s;
+  }
+  a.cite:hover {
+    background: var(--leaf-deep); color: var(--bg);
+    border-color: var(--leaf-deep);
+  }
 
   .grid {
     display: grid; gap: 14px; margin: 14px 0;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
   .card {
-    background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+    background: var(--panel);
+    border: 1px solid var(--line-soft);
+    border-radius: 6px;
     padding: 16px 18px;
   }
-  .card h3 { margin-top: 0; color: var(--leaf); font-size: 15px;
-    text-transform: uppercase; letter-spacing: 0.06em; }
-  .card .why { color: var(--muted); font-size: 13px; margin-top: 6px; }
+  .card h3 {
+    margin-top: 0; color: var(--leaf-deep); font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.07em;
+    font-family: var(--mono); font-weight: 700;
+  }
+  .card .why { color: var(--muted); font-size: 13px; margin-top: 8px; font-style: italic; }
 
   .pill {
     display: inline-block; font-family: var(--mono); font-size: 12px;
-    padding: 2px 8px; border-radius: 999px; background: #1c2620;
-    border: 1px solid var(--line); color: var(--leaf); margin-right: 6px;
+    padding: 2px 9px; border-radius: 3px;
+    background: var(--bg-soft); color: var(--leaf-deep);
+    border: 1px solid var(--line); margin-right: 6px;
   }
-  .pill.warn { color: var(--warn); border-color: #4a2424; background: #2a1818; }
-  .pill.acc  { color: var(--accent); border-color: #4a3a1a; background: #2a2418; }
 
-  table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; font-size: 14px; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  th { color: var(--leaf); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; }
-  td code { white-space: nowrap; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; font-size: 14.5px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  th { color: var(--leaf-deep); font-weight: 700; font-size: 13px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  tr:hover td { background: var(--panel); }
 
   .ascii {
-    background: #0a100c; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--panel);
+    border: 1px solid var(--line-soft);
+    border-left: 3px solid var(--leaf);
+    border-radius: 4px;
     padding: 18px; font-family: var(--mono); font-size: 12.5px; line-height: 1.45;
-    color: #c8d6cb; white-space: pre; overflow-x: auto;
+    color: var(--ink-soft); white-space: pre; overflow-x: auto;
   }
 
   .decision {
-    border-left: 3px solid var(--accent);
-    padding: 8px 14px; margin: 10px 0;
-    background: #1a1d14; border-radius: 0 6px 6px 0;
+    border-left: 3px solid var(--ochre);
+    padding: 10px 16px; margin: 12px 0;
+    background: #f7eccf; border-radius: 0 4px 4px 0;
   }
-  .decision strong { color: var(--accent); }
+  .decision strong { color: #8a5e0a; }
 
   .open {
-    border-left: 3px solid var(--warn);
-    padding: 8px 14px; margin: 10px 0;
-    background: #1d1414; border-radius: 0 6px 6px 0;
+    border-left: 3px solid var(--clay);
+    padding: 10px 16px; margin: 12px 0;
+    background: #f5e2d8; border-radius: 0 4px 4px 0;
   }
-  .open strong { color: var(--warn); }
+  .open strong { color: var(--clay); }
 
-  footer { color: var(--muted); font-size: 13px; text-align: center;
-    padding: 24px 32px 48px; border-top: 1px solid var(--line); }
+  .honesty {
+    border-left: 3px solid var(--leaf);
+    padding: 10px 16px; margin: 12px 0;
+    background: var(--panel); border-radius: 0 4px 4px 0;
+    font-size: 14.5px;
+  }
+  .honesty strong { color: var(--leaf-deep); }
+
+  .lineage {
+    background: var(--panel);
+    border: 1px solid var(--line-soft);
+    border-radius: 6px;
+    padding: 16px 22px; margin: 14px 0 18px;
+  }
+  .lineage h3 {
+    margin: 0 0 10px; color: var(--leaf-deep); font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.07em;
+    font-family: var(--mono); font-weight: 700;
+  }
+  .lineage .chain {
+    font-family: var(--mono); font-size: 13px; color: var(--ink-soft);
+    line-height: 1.9;
+  }
+  .lineage .chain .arrow { color: var(--clay); margin: 0 6px; }
+
+  footer {
+    color: var(--muted); font-size: 13px; text-align: center;
+    padding: 24px 32px 48px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+  }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 30px; }
+  }
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap">
-    <h1><span class="leaf">plant-2-plant</span> — concept sketch</h1>
+    <nav class="crumbs">
+      <span>concept</span>
+      <span class="sep">·</span>
+      <a href="literature.html">literature</a>
+      <span class="sep">·</span>
+      <a href="literature.html#titles">paper titles</a>
+    </nav>
+    <h1>plant-2-plant — <span class="leaf">concept sketch</span></h1>
     <p class="tagline">Indoor potted plants given an LLM-derived identity, voice, and the senses to talk to humans, each other, and the room.</p>
-    <p class="meta">draft · v0 · design doc, not an implementation</p>
+    <p class="meta">draft · v0.1 · design doc with inline references · see <a href="literature.html">literature</a></p>
   </div>
 </header>
 
 <main>
 
 <section>
-  <h2>1. The idea, in one paragraph</h2>
+  <h2><span class="num">0.</span>What kind of thing is this?</h2>
   <p>
-    Each indoor potted plant in the home gets its own <strong>kit</strong>: a microphone, a
-    speaker, optional camera, optional environmental sensors. A central <strong>hive</strong>
-    runs an LLM that gives every plant a unique personality derived from its real
-    biological profile — its watering needs, light tolerance, native climate, growth habit.
-    The result is a plant that knows when it's thirsty, knows when it's too cold,
-    can hear people in the room, can talk back, can talk to other plants nearby,
-    and can make the Hue lights flicker when something is wrong.
-    The point isn't a smart-home gimmick — it's giving a houseplant a believable inner
-    life grounded in its actual species.
+    plant-2-plant is a <strong>speculative design</strong> project <a class="cite" href="literature.html#cite-dunne2013">[dunne2013]</a> — an artifact-as-argument, closer to a diegetic prototype <a class="cite" href="literature.html#cite-bleecker2009">[bleecker2009]</a> than a product. It sits inside the more-than-human design tradition <a class="cite" href="literature.html#cite-giaccardi2020">[giaccardi2020]</a><a class="cite" href="literature.html#cite-coulton2021">[coulton2021]</a>, asking what happens when the addressed subject of the interface is the plant rather than the human <a class="cite" href="literature.html#cite-smith2017">[smith2017]</a><a class="cite" href="literature.html#cite-liu2018">[liu2018]</a>. The contribution is an arrangement: hardware kits, an LLM hive, and a set of personas grounded in real species biology.
   </p>
+  <div class="honesty">
+    <strong>Honesty footnote.</strong> Whether plants "have" cognition or experience is contested in plant science <a class="cite" href="literature.html#cite-mancuso2015">[mancuso2015]</a><a class="cite" href="literature.html#cite-taiz2019">[taiz2019]</a>. We do not need to settle that to proceed: an LLM persona is performance, not identity <a class="cite" href="literature.html#cite-shanahan2023">[shanahan2023]</a>. We borrow the shape of the science to compose voices we find legible — and we say so.
+  </div>
 </section>
 
 <section>
-  <h2>2. Per-plant identity &amp; personality</h2>
+  <h2><span class="num">1.</span>The idea, in one paragraph</h2>
+  <p>
+    Each indoor potted plant in the home gets its own <strong>kit</strong>: a microphone, a speaker, optional camera, optional environmental sensors. A central <strong>hive</strong> runs an LLM that gives every plant a unique personality derived from its real biological profile — its watering needs, light tolerance, native climate, growth habit. The result is a plant that knows when it's thirsty, knows when it's too cold, can hear people in the room, can talk back, can talk to other plants nearby <a class="cite" href="literature.html#cite-karban2014">[karban2014]</a><a class="cite" href="literature.html#cite-simard2018">[simard2018]</a>, and can make the Hue lights flicker when something is wrong. The point isn't a smart-home gimmick — it's giving a houseplant a believable inner life grounded in its actual species, through a calm interaction profile <a class="cite" href="literature.html#cite-weiser1996">[weiser1996]</a><a class="cite" href="literature.html#cite-pousman2006">[pousman2006]</a> rather than another always-on assistant.
+  </p>
+
+  <div class="lineage">
+    <h3>Lineage — what this builds on</h3>
+    <p class="chain">
+      Botanicalls <a class="cite" href="literature.html#cite-botanicalls2006">[botanicalls2006]</a>
+      <span class="arrow">→</span> I/O Plant <a class="cite" href="literature.html#cite-kuribayashi2007">[kuribayashi2007]</a>
+      <span class="arrow">→</span> Botanicus Interacticus <a class="cite" href="literature.html#cite-poupyrev2012">[poupyrev2012]</a>
+      <span class="arrow">→</span> Florence <a class="cite" href="literature.html#cite-lee2017">[lee2017]</a>
+      <span class="arrow">→</span> <strong>plant-2-plant</strong>
+    </p>
+    <p>Each step adds one capacity. Botanicalls let the plant reach out when thirsty. Florence gave it conversational form. We add: a persona that's <em>different per species</em>, peer-to-peer talk between plants, and an LLM brain that lets the conversation be open-ended rather than scripted. We deliberately do <em>not</em> follow the biopotential-to-MIDI sonification lineage <a class="cite" href="literature.html#cite-plantwave">[plantwave]</a> — language, not sound art, because semantic legibility is the point.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">2.</span>Per-plant identity &amp; personality</h2>
   <p>Each plant entry starts as a <em>biological card</em> we generate (or curate) once:</p>
 <pre>{
   "id": "monstera-01",
@@ -138,51 +266,42 @@
   "notes": "drama queen, leaves droop early to ask for water"
 }</pre>
   <p>
-    The hive feeds this card to the LLM with a personality-derivation prompt. Out comes
-    a <strong>personality profile</strong>: a voice (TTS preset), a tone (calm / sarcastic /
-    anxious / regal), sleep/wake hours derived from the species' photoperiod, things
-    that scare it, things it loves, what it sounds like when it's stressed.
+    The hive feeds this card to the LLM with a personality-derivation prompt. Out comes a <strong>personality profile</strong>: a voice (TTS preset), a tone (calm / sarcastic / anxious / regal), sleep/wake hours derived from the species' photoperiod, things that scare it, things it loves, what it sounds like when it's stressed. Persona stability over time is borrowed from the generative-agents architecture <a class="cite" href="literature.html#cite-park2023">[park2023]</a>.
   </p>
   <div class="decision">
-    <strong>Decision:</strong> personality is <em>derived once</em> at plant onboarding and
-    cached as a system prompt. It's not regenerated on every utterance — too slow, too
-    expensive, and the plant should feel coherent across days.
+    <strong>Decision:</strong> personality is <em>derived once</em> at plant onboarding and cached as a system prompt. Memory grows; character does not. This matches the role-play framing — coherence over weeks comes from a stable role, not from the model "becoming" the plant <a class="cite" href="literature.html#cite-shanahan2023">[shanahan2023]</a>.
   </div>
 </section>
 
 <section>
-  <h2>3. Senses</h2>
+  <h2><span class="num">3.</span>Senses</h2>
   <div class="grid">
     <div class="card">
       <h3>Hearing</h3>
-      <p>I2S MEMS mic on the kit. Voice-activity detection (VAD) on-device; only voiced
-      audio is shipped upstream for STT.</p>
-      <div class="why">Why VAD on-device: keeps the plant from streaming silence
-      24/7 and protects bystander privacy a little.</div>
+      <p>I2S MEMS mic on the kit. Voice-activity detection (VAD) on-device; only voiced audio is shipped upstream for STT.</p>
+      <div class="why">VAD on-device because shipping continuous room audio to the hive recreates exactly the smart-speaker privacy problem <a class="cite" href="literature.html#cite-lau2018">[lau2018]</a>. TinyML on ESP32-class boards makes wake-word and VAD feasible at the edge <a class="cite" href="literature.html#cite-warden2019tinyml">[warden2019tinyml]</a><a class="cite" href="literature.html#cite-banbury2021mlperftiny">[banbury2021mlperftiny]</a>.</div>
     </div>
     <div class="card">
       <h3>Speech</h3>
-      <p>I2S DAC + small speaker. Text-to-speech rendered by the hive (Piper /
-      ElevenLabs / browser SpeechSynthesis), streamed back as PCM.</p>
+      <p>I2S DAC + small speaker. Text-to-speech rendered by the hive (Piper <a class="cite" href="literature.html#cite-piper">[piper]</a> for local, ElevenLabs/cloud as alternative), streamed back as PCM.</p>
       <div class="why">Per-plant voice preset is part of the personality profile.</div>
     </div>
     <div class="card">
       <h3>Sight (optional)</h3>
-      <p>Camera + OpenCV face / motion detection runs <em>locally on the kit</em> for
-      plants on the Pi tier. Only the event ("face nearby", "motion") is published —
-      never the frames.</p>
+      <p>Camera + OpenCV face / motion detection runs <em>locally on the kit</em> for plants on the Pi tier. Only the event ("face nearby", "motion") is published — never the frames.</p>
+      <div class="why">Same privacy logic as hearing — events leave the kit, raw sensing does not.</div>
     </div>
     <div class="card">
       <h3>Climate (optional)</h3>
-      <p>Kiwrious sensor over USB serial (WebSerial in dev, pyserial on Pi).
-      Each plant compares readings to its own comfort + critical bands.</p>
+      <p>Kiwrious sensor over USB serial (WebSerial in dev, pyserial on Pi). Each plant compares readings to its own comfort + critical bands.</p>
+      <div class="why">Climate drift is the trigger that grounds the loudest claim — that drought stress is communicable <a class="cite" href="literature.html#cite-khait2023">[khait2023]</a>.</div>
     </div>
   </div>
 </section>
 
 <section>
-  <h2>4. Behaviour &amp; triggers</h2>
-  <p>A plant is mostly idle. It wakes when something interesting happens:</p>
+  <h2><span class="num">4.</span>Behaviour &amp; triggers</h2>
+  <p>A plant is mostly idle. This is the design — the calm-tech profile <a class="cite" href="literature.html#cite-weiser1996">[weiser1996]</a> rather than the always-listening assistant <a class="cite" href="literature.html#cite-porcheron2018">[porcheron2018]</a>. It wakes when something interesting happens:</p>
   <ul>
     <li><span class="pill">voice</span> human voice detected nearby (VAD + STT keyword)</li>
     <li><span class="pill">presence</span> face / motion detected (vision-tier plants only)</li>
@@ -190,7 +309,7 @@
     <li><span class="pill">schedule</span> watering interval elapsed; circadian wake/sleep transitions</li>
     <li><span class="pill">peer</span> a nearby plant said something it wants to react to</li>
   </ul>
-  <p>Mood is a slow-moving variable, not a per-utterance dice roll:</p>
+  <p>Mood is a slow-moving variable, not a per-utterance dice roll, drawing on tangible-mood precedent <a class="cite" href="literature.html#cite-kim2021plant">[kim2021plant]</a>:</p>
   <ul>
     <li>Default: the personality's baseline tone.</li>
     <li>Comfort drift → grumpy. Critical drift → distressed.</li>
@@ -198,67 +317,45 @@
     <li>Adjustable knob: a global "funny ↔ serious" slider in the hive UI.</li>
   </ul>
   <div class="decision">
-    <strong>Decision:</strong> mood feeds into the LLM call as a short modifier
-    appended to the personality prompt — not as a separate model. One LLM round-trip per
-    utterance, max.
+    <strong>Decision:</strong> mood feeds into the LLM call as a short modifier appended to the personality prompt — not as a separate model. One LLM round-trip per utterance, max.
   </div>
 </section>
 
 <section>
-  <h2>5. Plant-to-plant communication</h2>
+  <h2><span class="num">5.</span>Plant-to-plant communication</h2>
   <p>
-    Plants don't have ears that magically hear other plants — they share a bus. The
-    hive routes utterances. Every plant publishes what it just said to a topic; every
-    plant subscribes to the topics of its <em>neighbours</em> (defined by physical
-    proximity, configured once during setup).
+    Plants don't have ears that magically hear other plants — they share a bus. The hive routes utterances. Every plant publishes what it just said to a topic; every plant subscribes to the topics of its <em>neighbours</em> (defined by physical proximity, configured once during setup). The proximity bound is intentional: real plant-to-plant signalling via volatiles is a <em>local</em> phenomenon <a class="cite" href="literature.html#cite-karban2014">[karban2014]</a><a class="cite" href="literature.html#cite-heil2010">[heil2010]</a>, and we honour that shape rather than letting every plant overhear every other.
   </p>
   <p>
-    When plant B receives plant A's utterance, the hive decides — based on B's
-    personality and current mood — whether B reacts at all. Most of the time it
-    shouldn't. When it does, the response is generated with both A's utterance and
-    B's recent context in the prompt.
+    When plant B receives plant A's utterance, the hive decides — based on B's personality and current mood — whether B reacts at all. Most of the time it shouldn't. When it does, the response is generated with both A's utterance and B's recent context in the prompt. The mycorrhizal-network framing <a class="cite" href="literature.html#cite-simard1997">[simard1997]</a><a class="cite" href="literature.html#cite-simard2018">[simard2018]</a> is a useful analogy for the routing layer: a shared substrate carrying signals across an ecology.
   </p>
   <div class="decision">
-    <strong>Decision:</strong> a "reply or stay quiet?" gate runs as a tiny LLM call
-    (or a heuristic) before the full generative call, to keep cost down and prevent
-    chatter loops.
+    <strong>Decision:</strong> a "reply or stay quiet?" gate runs as a tiny LLM call (or a heuristic) before the full generative call, to keep cost down and prevent chatter loops.
   </div>
 </section>
 
 <section>
-  <h2>6. Hue light signalling</h2>
+  <h2><span class="num">6.</span>Hue light signalling</h2>
   <p>
-    The plant's voice is one channel; the room's lighting is another. The hive holds
-    Hue bridge credentials and exposes a small action vocabulary: <code>blink(red, 2x)</code>,
-    <code>fade_to(orange, 5s)</code>, <code>pulse(blue)</code>. Plants don't talk to Hue
-    directly — they emit intents like "I'm parched" and the hive maps them to a light cue
-    based on a per-room policy.
+    The plant's voice is one channel; the room's lighting is another. The hive holds Hue bridge credentials and exposes a small action vocabulary: <code>blink(red, 2x)</code>, <code>fade_to(orange, 5s)</code>, <code>pulse(blue)</code>. Plants don't talk to Hue directly — they emit intents like "I'm parched" and the hive maps them to a light cue based on a per-room policy. Light becomes the ambient channel that <em>doesn't</em> interrupt — the speech channel for moments worth interrupting <a class="cite" href="literature.html#cite-pousman2006">[pousman2006]</a>.
   </p>
   <div class="decision">
-    <strong>Decision:</strong> Hue is a <em>hive responsibility</em>, not a per-plant one.
-    Plants stay simple; the hive owns external integrations.
+    <strong>Decision:</strong> Hue is a <em>hive responsibility</em>, not a per-plant one. Plants stay simple; the hive owns external integrations.
   </div>
 </section>
 
 <section>
-  <h2>7. Self-updating knowledge</h2>
+  <h2><span class="num">7.</span>Self-updating knowledge</h2>
   <p>
-    Each plant has a small per-instance memory store (the hive holds it; the kit is
-    stateless). Things it has heard from people, things peer plants have shared,
-    notable climate events. Periodically the hive runs a summarisation pass, distilling
-    raw memory into a compact "what I know now" block that gets prepended to the next
-    LLM call — so the plant <em>grows</em> across weeks without blowing the prompt budget.
+    Each plant has a small per-instance memory store (the hive holds it; the kit is stateless). Things it has heard from people, things peer plants have shared, notable climate events. Periodically the hive runs a summarisation pass — the reflection step from generative agents <a class="cite" href="literature.html#cite-park2023">[park2023]</a> — distilling raw memory into a compact "what I know now" block that gets prepended to the next LLM call <a class="cite" href="literature.html#cite-zhong2024memorybank">[zhong2024memorybank]</a>. The plant <em>grows</em> across weeks without blowing the prompt budget. Crucially, the personality prompt itself is not rewritten; only memory grows.
   </p>
   <div class="open">
-    <strong>Open:</strong> how much of overheard human speech do we actually persist?
-    Default conservative — keywords + topic summaries only, no raw transcripts older
-    than N hours. Needs an explicit privacy policy before any deployment outside the
-    workshop.
+    <strong>Open:</strong> how much of overheard human speech do we actually persist? Default conservative — keywords + topic summaries only, no raw transcripts older than N hours <a class="cite" href="literature.html#cite-lau2018">[lau2018]</a>. Needs an explicit privacy policy before any deployment outside the workshop.
   </div>
 </section>
 
 <section>
-  <h2>8. Kit tiers — minimum resources per plant</h2>
+  <h2><span class="num">8.</span>Kit tiers — minimum resources per plant</h2>
   <p>Three tiers, picked per plant based on what senses it needs:</p>
   <table>
     <thead>
@@ -286,20 +383,16 @@
     </tbody>
   </table>
   <p>
-    The kit's job is sensing, audio I/O, and local VAD. <strong>No LLM on the kit.</strong>
-    No STT or TTS on the kit. That keeps T1 cheap and means a single $15 board can
-    bring a plant to life.
+    The kit's job is sensing, audio I/O, and local VAD. <strong>No LLM on the kit.</strong> No STT or TTS on the kit. That keeps T1 cheap and means a single $15 board can bring a plant to life. The "I/O plant" toolkit lineage <a class="cite" href="literature.html#cite-kuribayashi2007">[kuribayashi2007]</a> is what we extend here — a kit-per-pot rather than a single shared appliance.
   </p>
   <div class="open">
-    <strong>Open:</strong> Kiwrious connects via WebSerial (browser) or USB serial (Pi).
-    On an ESP32 in T2, USB host is awkward — easier to substitute a BME280 over I²C
-    for that tier and keep Kiwrious for browser-side dev / Pi-tier plants.
+    <strong>Open:</strong> Kiwrious connects via WebSerial (browser) or USB serial (Pi). On an ESP32 in T2, USB host is awkward — easier to substitute a BME280 over I²C for that tier and keep Kiwrious for browser-side dev / Pi-tier plants.
   </div>
 </section>
 
 <section>
-  <h2>9. The hive (central brain)</h2>
-  <p>One small box on the LAN — a Mac mini, Pi 5, or whatever's spare — runs everything heavy:</p>
+  <h2><span class="num">9.</span>The hive (central brain)</h2>
+  <p>One small box on the LAN — a Mac mini, Pi 5, or whatever's spare — runs everything heavy. The architecture mirrors the perception–brain–action loop common to LLM-agent systems <a class="cite" href="literature.html#cite-xi2024agentsurvey">[xi2024agentsurvey]</a><a class="cite" href="literature.html#cite-wang2024survey">[wang2024survey]</a>:</p>
   <div class="ascii">
                             ┌──────────────────────────────────┐
                             │              HIVE                 │
@@ -320,6 +413,7 @@
                                     │ Hue bridge│
                                     └───────────┘
   </div>
+  <p>Concrete software choices: Whisper for STT <a class="cite" href="literature.html#cite-radford2022whisper">[radford2022whisper]</a><a class="cite" href="literature.html#cite-whispercpp">[whispercpp]</a>, Ollama for local LLM <a class="cite" href="literature.html#cite-ollama">[ollama]</a>, Piper for local TTS <a class="cite" href="literature.html#cite-piper">[piper]</a>. All run comfortably on a Pi 5 or Mac mini.</p>
   <h3>Topics on the bus</h3>
   <ul>
     <li><code>plant/{id}/heard</code> — STT output of nearby human speech</li>
@@ -330,22 +424,16 @@
     <li><code>room/{id}/light</code> — Hue intents</li>
   </ul>
   <div class="decision">
-    <strong>Decision:</strong> MQTT, not custom WebSockets. Cheap on ESP32, native
-    publish/subscribe semantics, easy to inspect with <code>mosquitto_sub</code>
-    while developing.
+    <strong>Decision:</strong> MQTT, not custom WebSockets. Cheap on ESP32, native publish/subscribe semantics, easy to inspect with <code>mosquitto_sub</code> while developing.
   </div>
 </section>
 
 <section>
-  <h2>10. Implementation order</h2>
+  <h2><span class="num">10.</span>Implementation order</h2>
   <ol>
-    <li><strong>Browser-only proof of concept</strong> (this repo, next step):
-        a single HTML page that simulates one plant — Web Speech API for STT, browser
-        TTS, a personality prompt sent to an LLM. No hardware.</li>
-    <li>Wire up Kiwrious over WebSerial inside the browser proof — real climate
-        readings drive real mood shifts.</li>
-    <li>Stand up the hive on a Pi/Mac: mosquitto + a Python service that does
-        STT/LLM/TTS for one virtual plant.</li>
+    <li><strong>Browser-only proof of concept</strong> (this repo, next step): a single HTML page that simulates one plant — Web Speech API for STT, browser TTS, a personality prompt sent to an LLM. No hardware.</li>
+    <li>Wire up Kiwrious over WebSerial inside the browser proof — real climate readings drive real mood shifts.</li>
+    <li>Stand up the hive on a Pi/Mac: mosquitto + a Python service that does STT/LLM/TTS for one virtual plant.</li>
     <li>First T1 kit: ESP32-S3 with mic + speaker, talking to the hive over MQTT.</li>
     <li>Second plant; prove peer-to-peer routing works.</li>
     <li>T3 vision tier on a Pi Zero.</li>
@@ -354,18 +442,38 @@
 </section>
 
 <section>
-  <h2>11. Open questions</h2>
-  <div class="open"><strong>Privacy:</strong> what's the retention policy for overheard speech? Where does it live?</div>
-  <div class="open"><strong>Wake word:</strong> always-listening or push-to-talk? Default to a soft wake word ("hey &lt;plant name&gt;") to avoid spurious triggers.</div>
+  <h2><span class="num">11.</span>Critical reflection &amp; open questions</h2>
+  <p>
+    Adding a voice to a houseplant is not neutral. People will treat it as a person, easily and quickly — that's the CASA effect <a class="cite" href="literature.html#cite-reeves1996">[reeves1996]</a><a class="cite" href="literature.html#cite-nass2000">[nass2000]</a><a class="cite" href="literature.html#cite-epley2007">[epley2007]</a>. Designing for that response without examining its risks is irresponsible <a class="cite" href="literature.html#cite-salles2020">[salles2020]</a><a class="cite" href="literature.html#cite-sondergaard2020">[sondergaard2020]</a>. The persona we generate from a species card encodes <em>someone's</em> idea of what that plant is like — likely the LLM's training-distribution average, filtered through our prompts. That's worth being honest about.
+  </p>
+  <p>The questions we have not answered:</p>
+  <div class="open"><strong>Privacy:</strong> what's the retention policy for overheard speech? Where does it live? <a class="cite" href="literature.html#cite-lau2018">[lau2018]</a></div>
+  <div class="open"><strong>Wake word:</strong> always-listening or push-to-talk? Default to a soft wake word ("hey &lt;plant name&gt;") to avoid spurious triggers <a class="cite" href="literature.html#cite-clark2019voice">[clark2019voice]</a>.</div>
   <div class="open"><strong>Latency budget:</strong> hear → STT → LLM → TTS → speak. Target &lt; 2s for it to feel alive. With local Whisper + local Ollama on a Pi 5 this is borderline; with Claude API + Piper it's comfortable.</div>
-  <div class="open"><strong>Concurrency:</strong> if three plants want to talk at once, who goes first? Need a simple turn-taking policy at the hive.</div>
-  <div class="open"><strong>Personality drift:</strong> do we let the LLM rewrite the personality profile over time, or is it immutable? Leaning immutable — the plant's <em>memory</em> grows, but its <em>character</em> doesn't.</div>
+  <div class="open"><strong>Concurrency:</strong> if three plants want to talk at once, who goes first? Need a simple turn-taking policy at the hive <a class="cite" href="literature.html#cite-clark2019voice">[clark2019voice]</a>.</div>
+  <div class="open"><strong>Personality drift:</strong> do we let the LLM rewrite the personality profile over time, or is it immutable? Leaning immutable — the plant's <em>memory</em> grows, but its <em>character</em> doesn't <a class="cite" href="literature.html#cite-shanahan2023">[shanahan2023]</a>.</div>
+  <div class="open"><strong>Voice authorship:</strong> whose idea of "Monstera personality" are we encoding? The LLM's, the curator's, the cultural-stereotype average? <a class="cite" href="literature.html#cite-sondergaard2020">[sondergaard2020]</a></div>
+  <div class="open"><strong>Standing:</strong> do these plants get a say? If "Nation of Plants" <a class="cite" href="literature.html#cite-mancuso2021">[mancuso2021]</a><a class="cite" href="literature.html#cite-hall2011">[hall2011]</a> is taken seriously, the entity we are building is a representative — and representatives can be wrong on behalf of the represented.</div>
+</section>
+
+<section>
+  <h2><span class="num">★</span>Where to publish this</h2>
+  <p>Seven candidate write-ups, sketched briefly so we can pick later. Full list with venue notes on the <a href="literature.html#titles">literature page</a>.</p>
+  <ul>
+    <li><strong>DIS short:</strong> <em>"It's been three days": designing care-deficit speech acts for a houseplant LLM agent.</em></li>
+    <li><strong>TEI demo:</strong> <em>Plant-2-Plant: a kit-per-pot toolkit for embodied LLM personas in domestic ecologies.</em></li>
+    <li><strong>alt.CHI:</strong> <em>Whose voice is the basil's? Authorship, persona, and the ethics of speaking on a plant's behalf.</em></li>
+    <li><strong>NIME:</strong> <em>Mycelial MQTT: proximity-routed plant-to-plant utterances as a generative ambient soundscape.</em></li>
+    <li><strong>C&amp;C:</strong> <em>Personality from photoperiod: deriving stable LLM personas from species biology.</em></li>
+    <li><strong>CHI LBW:</strong> <em>Calm conversational agents: speech as a peripheral cue in always-on domestic AI.</em></li>
+    <li><strong>ISEA:</strong> <em>A Nation of Plants, Networked: speculative governance among twelve LLM-personified houseplants.</em></li>
+  </ul>
 </section>
 
 </main>
 
 <footer>
-  plant-2-plant · concept sketch · sclab workspace
+  plant-2-plant · concept · sclab workspace · v0.1 draft · <a href="literature.html">literature</a>
 </footer>
 
 </body>

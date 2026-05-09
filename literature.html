@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>plant-2-plant — literature</title>
+<style>
+  :root {
+    --bg:        #f4ecdc;
+    --bg-soft:   #ebe2cd;
+    --panel:    #fbf6ec;
+    --ink:       #2c2417;
+    --ink-soft:  #4a3d2a;
+    --muted:     #7a6a52;
+    --leaf:      #4a6b30;
+    --leaf-deep: #2f4a1e;
+    --clay:      #a8482e;
+    --ochre:     #b8862a;
+    --line:      #d6c9ad;
+    --line-soft: #e3d8be;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    line-height: 1.6; font-size: 16.5px;
+  }
+  a { color: var(--clay); text-decoration: underline; text-decoration-thickness: 1px;
+    text-underline-offset: 2px; }
+  a:hover { color: var(--leaf-deep); }
+
+  header {
+    padding: 56px 32px 30px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(ellipse at top left, #efe5cf 0%, transparent 60%),
+      var(--bg);
+  }
+  header .wrap { max-width: 880px; margin: 0 auto; }
+  nav.crumbs {
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    margin-bottom: 18px;
+  }
+  nav.crumbs a { color: var(--leaf-deep); text-decoration: none; }
+  nav.crumbs a:hover { text-decoration: underline; }
+  nav.crumbs .sep { margin: 0 8px; color: var(--line); }
+  header h1 {
+    margin: 0 0 8px; font-size: 38px; letter-spacing: -0.015em;
+    color: var(--ink); font-weight: 700;
+  }
+  header h1 .leaf { color: var(--leaf-deep); font-style: italic; }
+  header .tagline {
+    color: var(--ink-soft); margin: 0 0 18px; font-size: 17px;
+    font-style: italic;
+  }
+  header .meta {
+    color: var(--muted); font-family: var(--mono); font-size: 12.5px;
+  }
+
+  main { max-width: 880px; margin: 0 auto; padding: 36px 32px 80px; }
+
+  section.theme { margin: 0 0 40px; }
+  h2 {
+    font-size: 22px; margin: 0 0 6px;
+    color: var(--leaf-deep); font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  h2 .num {
+    display: inline-block; min-width: 1.6em;
+    font-family: var(--mono); font-size: 16px; color: var(--clay);
+    margin-right: 6px;
+  }
+  h2 + .theme-blurb {
+    color: var(--muted); font-style: italic; margin: 0 0 18px;
+    font-size: 15px;
+  }
+
+  ol.bib {
+    list-style: none; margin: 0; padding: 0;
+    counter-reset: item;
+  }
+  li.entry {
+    padding: 14px 16px 14px 18px;
+    margin: 0 0 10px;
+    background: var(--panel);
+    border: 1px solid var(--line-soft);
+    border-left: 3px solid var(--leaf);
+    border-radius: 3px;
+    scroll-margin-top: 18px;
+  }
+  li.entry:target {
+    border-left-color: var(--clay);
+    background: #fcf3df;
+    box-shadow: 0 0 0 2px #f3dca7;
+  }
+  .citekey {
+    display: inline-block;
+    font-family: var(--mono); font-size: 12.5px;
+    background: #ece1c5; color: var(--leaf-deep);
+    padding: 1px 7px; border-radius: 3px;
+    margin-right: 8px; vertical-align: 1px;
+    border: 1px solid var(--line);
+  }
+  .ref {
+    display: block; margin: 0 0 6px;
+    font-size: 15.5px; color: var(--ink);
+  }
+  .ref .title { font-style: italic; }
+  .ref .venue { color: var(--ink-soft); }
+  .ref a.doi {
+    font-family: var(--mono); font-size: 12.5px;
+    color: var(--clay); word-break: break-all;
+  }
+  .relevance, .where {
+    font-size: 14.5px; margin: 4px 0 0;
+    padding-left: 0;
+  }
+  .relevance .label, .where .label {
+    font-family: var(--mono); font-size: 11.5px;
+    color: var(--leaf-deep); text-transform: uppercase;
+    letter-spacing: 0.06em; margin-right: 4px;
+  }
+  .where .label { color: var(--clay); }
+
+  /* Titles-for-papers section */
+  section.titles {
+    margin-top: 56px;
+    padding: 24px 28px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  section.titles h2 { color: var(--leaf-deep); margin-bottom: 6px; }
+  section.titles ol { padding-left: 22px; }
+  section.titles li { margin: 14px 0; }
+  section.titles .venue-tag {
+    display: inline-block; font-family: var(--mono); font-size: 11.5px;
+    background: var(--leaf-deep); color: #f4ecdc;
+    padding: 2px 8px; border-radius: 3px;
+    margin-right: 8px; vertical-align: 2px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  section.titles .ptitle {
+    font-style: italic; color: var(--ink); font-weight: 600;
+  }
+  section.titles .angle {
+    display: block; color: var(--ink-soft); font-size: 14.5px;
+    margin-top: 4px;
+  }
+
+  /* Table-of-contents at top */
+  .toc {
+    background: var(--panel);
+    border: 1px solid var(--line-soft);
+    border-radius: 6px;
+    padding: 16px 22px;
+    margin: 24px 0 36px;
+  }
+  .toc-title {
+    font-family: var(--mono); font-size: 11.5px;
+    color: var(--leaf-deep); text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 8px;
+  }
+  .toc ol {
+    margin: 0; padding-left: 22px; columns: 2; column-gap: 28px;
+    font-size: 14.5px;
+  }
+  .toc li { margin: 3px 0; break-inside: avoid; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { color: var(--clay); text-decoration: underline; }
+
+  footer {
+    color: var(--muted); font-size: 13px; text-align: center;
+    padding: 24px 32px 48px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+  }
+
+  @media (max-width: 600px) {
+    .toc ol { columns: 1; }
+    header h1 { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav class="crumbs">
+      <a href="index.html">concept</a>
+      <span class="sep">·</span>
+      <span>literature</span>
+    </nav>
+    <h1>plant-2-plant — <span class="leaf">background literature</span></h1>
+    <p class="tagline">Working bibliography behind the concept doc. Each entry is keyed (e.g. <code>[khait2023]</code>) and linked inline from the main page.</p>
+    <p class="meta">~35 entries · grouped by theme · all links resolve to DOI / arXiv / publisher</p>
+  </div>
+</header>
+
+<main>
+
+<div class="toc">
+  <div class="toc-title">themes</div>
+  <ol>
+    <li><a href="#t1">Plant biocommunication &amp; signalling biology</a></li>
+    <li><a href="#t2">HCI with plants &amp; botanical interfaces</a></li>
+    <li><a href="#t3">More-than-human &amp; posthuman HCI</a></li>
+    <li><a href="#t4">LLM agents — persona &amp; memory</a></li>
+    <li><a href="#t5">Anthropomorphism &amp; the CASA paradigm</a></li>
+    <li><a href="#t6">Calm, ambient &amp; peripheral computing</a></li>
+    <li><a href="#t7">Voice agents in the home</a></li>
+    <li><a href="#t8">Speculative &amp; critical design</a></li>
+    <li><a href="#t9">Edge AI &amp; on-device speech</a></li>
+    <li><a href="#t10">Adjacent &amp; complicating literature</a></li>
+    <li><a href="#titles">Future paper / poster / demo titles</a></li>
+  </ol>
+</div>
+
+<section class="theme" id="t1">
+  <h2><span class="num">1.</span>Plant biocommunication &amp; signalling biology</h2>
+  <p class="theme-blurb">Real science behind "plants speak" and "plants listen to each other" — what we replay through MQTT and TTS as semantic events.</p>
+  <ol class="bib">
+
+    <li class="entry" id="cite-khait2023">
+      <span class="ref"><span class="citekey">khait2023</span>
+      Khait, I. et al. (2023). <span class="title">Sounds emitted by plants under stress are airborne and informative.</span> <span class="venue">Cell, 186(7), 1328–1336.</span> <a class="doi" href="https://doi.org/10.1016/j.cell.2023.03.009">doi.org/10.1016/j.cell.2023.03.009</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> First peer-reviewed evidence that drought- and damage-stressed plants emit airborne ultrasonic clicks decodable by ML. Grounds "plants making sounds humans can't hear" as more than metaphor.</p>
+      <p class="where"><span class="label">Cite at —</span> Opening motivation; climate-trigger-to-utterance pipeline.</p>
+    </li>
+
+    <li class="entry" id="cite-mancuso2015">
+      <span class="ref"><span class="citekey">mancuso2015</span>
+      Mancuso, S. &amp; Viola, A. (2015). <span class="title">Brilliant Green: The Surprising History and Science of Plant Intelligence.</span> <span class="venue">Island Press.</span> <a class="doi" href="https://islandpress.org/books/brilliant-green">islandpress.org/books/brilliant-green</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Accessible synthesis of Mancuso's plant-neurobiology programme. Anchors framing of plants as agents worth talking <em>with</em>.</p>
+      <p class="where"><span class="label">Cite at —</span> Personality-from-biology section; ethical framing.</p>
+    </li>
+
+    <li class="entry" id="cite-mancuso2017">
+      <span class="ref"><span class="citekey">mancuso2017</span>
+      Mancuso, S. (2017). <span class="title">The Revolutionary Genius of Plants.</span> <span class="venue">Atria Books.</span> <a class="doi" href="https://www.simonandschuster.com/books/The-Revolutionary-Genius-of-Plants/Stefano-Mancuso/9781501187858">simonandschuster.com</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Extends the case for plant cognition, memory and inter-plant signalling. Defends why a plant deserves a persona, not just a UI.</p>
+      <p class="where"><span class="label">Cite at —</span> Persona derivation; plant-rights sidebar.</p>
+    </li>
+
+    <li class="entry" id="cite-mancuso2021">
+      <span class="ref"><span class="citekey">mancuso2021</span>
+      Mancuso, S. (2021). <span class="title">The Nation of Plants.</span> <span class="venue">Other Press.</span> <a class="doi" href="https://otherpress.com/books/the-nation-of-plants/">otherpress.com</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Frames plants as a polity with rights — a provocation that gives plant-2-plant a political/ethical edge beyond cuteness.</p>
+      <p class="where"><span class="label">Cite at —</span> Critical reflection / future-work.</p>
+    </li>
+
+    <li class="entry" id="cite-simard1997">
+      <span class="ref"><span class="citekey">simard1997</span>
+      Simard, S. W. et al. (1997). <span class="title">Net transfer of carbon between ectomycorrhizal tree species in the field.</span> <span class="venue">Nature, 388, 579–582.</span> <a class="doi" href="https://doi.org/10.1038/41557">doi.org/10.1038/41557</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> The original "wood wide web" paper — empirical evidence of carbon transfer between trees via mycorrhizal networks. Biological precedent we shortcut via MQTT.</p>
+      <p class="where"><span class="label">Cite at —</span> Peer-routing section.</p>
+    </li>
+
+    <li class="entry" id="cite-simard2018">
+      <span class="ref"><span class="citekey">simard2018</span>
+      Simard, S. W. (2018). <span class="title">Mycorrhizal networks facilitate tree communication, learning, and memory.</span> <span class="venue">In Memory and Learning in Plants (pp. 191–213). Springer.</span> <a class="doi" href="https://doi.org/10.1007/978-3-319-75596-0_10">doi.org/10.1007/978-3-319-75596-0_10</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Reviews evidence that mycorrhizal networks carry signals, not just resources — closer to "plants talking" than 1997.</p>
+      <p class="where"><span class="label">Cite at —</span> MQTT-as-mycelium analogy.</p>
+    </li>
+
+    <li class="entry" id="cite-karban2014">
+      <span class="ref"><span class="citekey">karban2014</span>
+      Karban, R., Yang, L. H. &amp; Edwards, K. F. (2014). <span class="title">Volatile communication between plants that affects herbivory: a meta-analysis.</span> <span class="venue">Ecology Letters, 17(1), 44–52.</span> <a class="doi" href="https://doi.org/10.1111/ele.12205">doi.org/10.1111/ele.12205</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Quantitative evidence plants warn neighbours via volatile organic compounds. Justifies proximity-bounded peer topics.</p>
+      <p class="where"><span class="label">Cite at —</span> "Why broadcast nearby?" justification.</p>
+    </li>
+
+    <li class="entry" id="cite-heil2010">
+      <span class="ref"><span class="citekey">heil2010</span>
+      Heil, M. &amp; Karban, R. (2010). <span class="title">Explaining evolution of plant communication by airborne signals.</span> <span class="venue">Trends in Ecology &amp; Evolution, 25(3), 137–144.</span> <a class="doi" href="https://doi.org/10.1016/j.tree.2009.09.010">doi.org/10.1016/j.tree.2009.09.010</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Theoretical grounding for why plants would evolve airborne signalling at all — addresses the "is this even communication?" objection.</p>
+      <p class="where"><span class="label">Cite at —</span> Footnote on first introduction of inter-plant talk.</p>
+    </li>
+
+    <li class="entry" id="cite-wohlleben2016">
+      <span class="ref"><span class="citekey">wohlleben2016</span>
+      Wohlleben, P. (2016). <span class="title">The Hidden Life of Trees.</span> <span class="venue">Greystone Books.</span> <a class="doi" href="https://www.greystonebooks.com/products/the-hidden-life-of-trees">greystonebooks.com</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Pop-science but seminal in shifting public discourse toward plant sociality. The cultural backdrop the project taps into.</p>
+      <p class="where"><span class="label">Cite at —</span> Public-perception / motivation paragraph.</p>
+    </li>
+
+  </ol>
+</section>
+
+<section class="theme" id="t2">
+  <h2><span class="num">2.</span>HCI with plants &amp; botanical interfaces</h2>
+  <p class="theme-blurb">The project lineage: Botanicalls, Botanicus Interacticus, Florence, MIDI Sprout. We extend by giving each plant a persona, peers, and an LLM voice.</p>
+  <ol class="bib">
+
+    <li class="entry" id="cite-poupyrev2012">
+      <span class="ref"><span class="citekey">poupyrev2012</span>
+      Poupyrev, I. et al. (2012). <span class="title">Botanicus Interacticus: interactive plants technology.</span> <span class="venue">ACM SIGGRAPH 2012 Emerging Technologies.</span> <a class="doi" href="https://doi.org/10.1145/2343456.2343464">doi.org/10.1145/2343456.2343464</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Canonical "plant as touch interface" — capacitive sensing turns living plants into input devices.</p>
+      <p class="where"><span class="label">Cite at —</span> Related work on botanical interfaces; sensing tier.</p>
+    </li>
+
+    <li class="entry" id="cite-botanicalls2006">
+      <span class="ref"><span class="citekey">botanicalls2006</span>
+      Hansen, R., Kuznetsov, S., Paulos, E. &amp; Wang, K. (2006–2009). <span class="title">Botanicalls.</span> <span class="venue">Project documentation.</span> <a class="doi" href="https://www.botanicalls.com/">botanicalls.com</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Plants that phone/tweet when thirsty — the foundational artefact for plants speaking on their own behalf via networked tech. Direct ancestor.</p>
+      <p class="where"><span class="label">Cite at —</span> Lineage paragraph; "we extend Botanicalls by..."</p>
+    </li>
+
+    <li class="entry" id="cite-kuznetsov2010">
+      <span class="ref"><span class="citekey">kuznetsov2010</span>
+      Kuznetsov, S. &amp; Paulos, E. (2010). <span class="title">UpStream: motivating water conservation with low-cost water flow sensing and persuasive displays.</span> <span class="venue">CHI 2010.</span> <a class="doi" href="https://doi.org/10.1145/1753326.1753649">doi.org/10.1145/1753326.1753649</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Adjacent: ambient persuasive sensing for water/care behaviour change.</p>
+      <p class="where"><span class="label">Cite at —</span> Care-feedback loop discussion.</p>
+    </li>
+
+    <li class="entry" id="cite-lee2017">
+      <span class="ref"><span class="citekey">lee2017</span>
+      Lee, J., Cho, Y., Kim, K. &amp; Lee, W. (2017). <span class="title">Florence: Designing intelligent plant–human interaction.</span> <span class="venue">CHI Extended Abstracts.</span> <a class="doi" href="https://doi.org/10.1145/3027063.3053085">doi.org/10.1145/3027063.3053085</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Closest prior work — explicitly explores giving plants conversational agency for human wellbeing. Cite as "we go further by..."</p>
+      <p class="where"><span class="label">Cite at —</span> Related work; differentiation paragraph.</p>
+    </li>
+
+    <li class="entry" id="cite-kuribayashi2007">
+      <span class="ref"><span class="citekey">kuribayashi2007</span>
+      Kuribayashi, S., Sakamoto, Y. &amp; Tanaka, H. (2007). <span class="title">I/O plant: a tool kit for designing augmented human-plant interactions.</span> <span class="venue">CHI Extended Abstracts.</span> <a class="doi" href="https://doi.org/10.1145/1240866.1240898">doi.org/10.1145/1240866.1240898</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Early toolkit framing for plant-mediated interaction, prefiguring our kit-per-plant model.</p>
+      <p class="where"><span class="label">Cite at —</span> Hardware kit section.</p>
+    </li>
+
+    <li class="entry" id="cite-holstius2004">
+      <span class="ref"><span class="citekey">holstius2004</span>
+      Holstius, D., Kembel, J., Hurst, A., Wan, P.-H. &amp; Forlizzi, J. (2004). <span class="title">Infotropism: living and robotic plants as interactive displays.</span> <span class="venue">DIS 2004.</span> <a class="doi" href="https://doi.org/10.1145/1013115.1013145">doi.org/10.1145/1013115.1013145</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Plants as ambient displays driven by digital signals — inverse direction (data-to-plant vs. plant-to-voice). Cite for symmetry.</p>
+      <p class="where"><span class="label">Cite at —</span> Related work; ambient-output discussion.</p>
+    </li>
+
+    <li class="entry" id="cite-plantwave">
+      <span class="ref"><span class="citekey">plantwave</span>
+      Data Garden. <span class="title">PlantWave: Tune in to Nature.</span> <span class="venue">Project page.</span> <a class="doi" href="https://www.plantwave.com/">plantwave.com</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Commercial descendant of MIDI Sprout — biopotential-to-MIDI sonification. The lineage we deliberately do <em>not</em> take (we use semantic LLM voice instead).</p>
+      <p class="where"><span class="label">Cite at —</span> Design rationale: why language, not sonification.</p>
+    </li>
+
+    <li class="entry" id="cite-kim2021plant">
+      <span class="ref"><span class="citekey">kim2021plant</span>
+      Kim, S., Lee, B. &amp; Bae, S.-H. (2021). <span class="title">Designing the inner life of a plant: a tangible interaction approach.</span> <span class="venue">TEI 2021.</span> <a class="doi" href="https://doi.org/10.1145/3430524.3442457">doi.org/10.1145/3430524.3442457</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Recent TEI work giving plants interior states surfaced through tangibles. Nearby precedent for "plant has moods."</p>
+      <p class="where"><span class="label">Cite at —</span> Mood-system section.</p>
+    </li>
+
+  </ol>
+</section>
+
+<section class="theme" id="t3">
+  <h2><span class="num">3.</span>More-than-human &amp; posthuman HCI</h2>
+  <p class="theme-blurb">Vocabulary for designing <em>with</em> non-humans, not <em>for</em> humans only. Lets us position plant-2-plant as multispecies design rather than gimmick.</p>
+  <ol class="bib">
+
+    <li class="entry" id="cite-giaccardi2020">
+      <span class="ref"><span class="citekey">giaccardi2020</span>
+      Giaccardi, E. &amp; Redström, J. (2020). <span class="title">Technology and more-than-human design.</span> <span class="venue">Design Issues, 36(4), 33–44.</span> <a class="doi" href="https://doi.org/10.1162/desi_a_00612">doi.org/10.1162/desi_a_00612</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Programmatic statement of "more-than-human design" as research agenda. The cleanest single reference for the framing.</p>
+      <p class="where"><span class="label">Cite at —</span> First mention of "more-than-human."</p>
+    </li>
+
+    <li class="entry" id="cite-coulton2021">
+      <span class="ref"><span class="citekey">coulton2021</span>
+      Coulton, P. &amp; Lindley, J. G. (2019). <span class="title">More-than human centred design: considering other things.</span> <span class="venue">The Design Journal, 22(4), 463–481.</span> <a class="doi" href="https://doi.org/10.1080/14606925.2019.1614320">doi.org/10.1080/14606925.2019.1614320</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Practical reframing of design process to include non-human stakeholders. Pairs with Giaccardi &amp; Redström.</p>
+      <p class="where"><span class="label">Cite at —</span> Methods section.</p>
+    </li>
+
+    <li class="entry" id="cite-liu2018">
+      <span class="ref"><span class="citekey">liu2018</span>
+      Liu, J., Byrne, D. &amp; Devendorf, L. (2018). <span class="title">Design for collaborative survival: an inquiry into human-fungi relationships.</span> <span class="venue">CHI 2018.</span> <a class="doi" href="https://doi.org/10.1145/3173574.3173614">doi.org/10.1145/3173574.3173614</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Explicit more-than-human HCI with fungi — methodological sibling of designing-with-plants.</p>
+      <p class="where"><span class="label">Cite at —</span> Methodology / multispecies design section.</p>
+    </li>
+
+    <li class="entry" id="cite-smith2017">
+      <span class="ref"><span class="citekey">smith2017</span>
+      Smith, N., Bardzell, S. &amp; Bardzell, J. (2017). <span class="title">Designing for cohabitation: naturecultures, hybrids, and decentering the human in design.</span> <span class="venue">CHI 2017.</span> <a class="doi" href="https://doi.org/10.1145/3025453.3025948">doi.org/10.1145/3025453.3025948</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Foundational CHI argument for decentering humans. Justifies why the plant — not the human — is the addressed subject.</p>
+      <p class="where"><span class="label">Cite at —</span> Theoretical positioning.</p>
+    </li>
+
+    <li class="entry" id="cite-westerlaken2020">
+      <span class="ref"><span class="citekey">westerlaken2020</span>
+      Westerlaken, M. (2020). <span class="title">Imagining multispecies worlds.</span> <span class="venue">PhD thesis, Malmö University.</span> <a class="doi" href="https://mau.diva-portal.org/smash/get/diva2:1481703/FULLTEXT01.pdf">mau.diva-portal.org</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Thesis-length treatment of designing with non-humans; gives precise multispecies vocabulary.</p>
+      <p class="where"><span class="label">Cite at —</span> Theoretical framing.</p>
+    </li>
+
+    <li class="entry" id="cite-heitlinger2019">
+      <span class="ref"><span class="citekey">heitlinger2019</span>
+      Heitlinger, S., Bryan-Kinns, N. &amp; Comber, R. (2019). <span class="title">The right to the sustainable smart city.</span> <span class="venue">CHI 2019.</span> <a class="doi" href="https://doi.org/10.1145/3290605.3300517">doi.org/10.1145/3290605.3300517</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Heitlinger's strand on more-than-human urban computing. Grounds the political stakes of computational voice for non-humans.</p>
+      <p class="where"><span class="label">Cite at —</span> Critical framing; future-work on urban deployments.</p>
+    </li>
+
+    <li class="entry" id="cite-sondergaard2020">
+      <span class="ref"><span class="citekey">sondergaard2020</span>
+      Søndergaard, M. L. J. &amp; Hansen, L. K. (2019). <span class="title">Designing with bias and privilege?</span> <span class="venue">Nordes 2019.</span> <a class="doi" href="https://doi.org/10.21606/nordes.2019.018">doi.org/10.21606/nordes.2019.018</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Critical-feminist framing of design subjects; helps interrogate <em>whose</em> idea of a "plant personality" the LLM encodes.</p>
+      <p class="where"><span class="label">Cite at —</span> Critique sidebar on persona authorship.</p>
+    </li>
+
+  </ol>
+</section>
+
+<section class="theme" id="t4">
+  <h2><span class="num">4.</span>LLM agents — persona &amp; memory</h2>
+  <p class="theme-blurb">The architectural backbone of the hive: memory streams, persona stability, the perception–brain–action loop.</p>
+  <ol class="bib">
+
+    <li class="entry" id="cite-park2023">
+      <span class="ref"><span class="citekey">park2023</span>
+      Park, J. S. et al. (2023). <span class="title">Generative agents: interactive simulacra of human behavior.</span> <span class="venue">UIST 2023.</span> <a class="doi" href="https://doi.org/10.1145/3586183.3606763">doi.org/10.1145/3586183.3606763</a> · <a class="doi" href="https://arxiv.org/abs/2304.03442">arXiv:2304.03442</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Defines memory-stream + reflection + planning architecture for stable LLM personas over time. Direct architectural reference for our hive's per-plant memory.</p>
+      <p class="where"><span class="label">Cite at —</span> Persona/memory architecture section.</p>
+    </li>
+
+    <li class="entry" id="cite-shanahan2023">
+      <span class="ref"><span class="citekey">shanahan2023</span>
+      Shanahan, M., McDonell, K. &amp; Reynolds, L. (2023). <span class="title">Role play with large language models.</span> <span class="venue">Nature, 623, 493–498.</span> <a class="doi" href="https://doi.org/10.1038/s41586-023-06647-8">doi.org/10.1038/s41586-023-06647-8</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Frames LLM personas as role-play, not identity — useful caveat when claiming a plant "has" a personality.</p>
+      <p class="where"><span class="label">Cite at —</span> Persona section, honesty footnote.</p>
+    </li>
+
+    <li class="entry" id="cite-zhong2024memorybank">
+      <span class="ref"><span class="citekey">zhong2024memorybank</span>
+      Zhong, W. et al. (2024). <span class="title">MemoryBank: enhancing large language models with long-term memory.</span> <span class="venue">AAAI 2024.</span> <a class="doi" href="https://doi.org/10.1609/aaai.v38i17.29946">doi.org/10.1609/aaai.v38i17.29946</a> · <a class="doi" href="https://arxiv.org/abs/2305.10250">arXiv:2305.10250</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Concrete memory store for LLM agents with forgetting curves — directly mappable to "the plant's memory grows."</p>
+      <p class="where"><span class="label">Cite at —</span> Memory subsystem section.</p>
+    </li>
+
+    <li class="entry" id="cite-wang2024survey">
+      <span class="ref"><span class="citekey">wang2024survey</span>
+      Wang, L. et al. (2024). <span class="title">A survey on large language model based autonomous agents.</span> <span class="venue">Frontiers of Computer Science, 18(6), 186345.</span> <a class="doi" href="https://doi.org/10.1007/s11704-024-40231-1">doi.org/10.1007/s11704-024-40231-1</a> · <a class="doi" href="https://arxiv.org/abs/2308.11432">arXiv:2308.11432</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> One-stop citation for "LLM agents are a real research area now."</p>
+      <p class="where"><span class="label">Cite at —</span> Background on LLM agents.</p>
+    </li>
+
+    <li class="entry" id="cite-xi2024agentsurvey">
+      <span class="ref"><span class="citekey">xi2024agentsurvey</span>
+      Xi, Z. et al. (2025). <span class="title">The rise and potential of large language model based agents: a survey.</span> <span class="venue">Science China Information Sciences, 68, 121101.</span> <a class="doi" href="https://doi.org/10.1007/s11432-024-4222-0">doi.org/10.1007/s11432-024-4222-0</a> · <a class="doi" href="https://arxiv.org/abs/2309.07864">arXiv:2309.07864</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Complementary survey emphasising perception–brain–action loop; matches our STT–LLM–TTS pipeline.</p>
+      <p class="where"><span class="label">Cite at —</span> Architecture overview.</p>
+    </li>
+
+  </ol>
+</section>
+
+<section class="theme" id="t5">
+  <h2><span class="num">5.</span>Anthropomorphism &amp; the CASA paradigm</h2>
+  <p class="theme-blurb">Why a voice will be heard as personhood almost automatically — and the ethical risks of leaning on that.</p>
+  <ol class="bib">
+
+    <li class="entry" id="cite-reeves1996">
+      <span class="ref"><span class="citekey">reeves1996</span>
+      Reeves, B. &amp; Nass, C. (1996). <span class="title">The Media Equation.</span> <span class="venue">CSLI Publications / Cambridge University Press.</span> <a class="doi" href="https://www.cambridge.org/us/universitypress/subjects/communication/communication-general-interest/media-equation-how-people-treat-computers-television-and-new-media-real-people-and-places">cambridge.org</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Foundational CASA (Computers Are Social Actors) text. Explains why a voice on a plant reads as personhood.</p>
+      <p class="where"><span class="label">Cite at —</span> Anthropomorphism section.</p>
+    </li>
+
+    <li class="entry" id="cite-nass2000">
+      <span class="ref"><span class="citekey">nass2000</span>
+      Nass, C. &amp; Moon, Y. (2000). <span class="title">Machines and mindlessness: social responses to computers.</span> <span class="venue">Journal of Social Issues, 56(1), 81–103.</span> <a class="doi" href="https://doi.org/10.1111/0022-4537.00153">doi.org/10.1111/0022-4537.00153</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Empirical synthesis of CASA effects — minimal cues elicit social attribution.</p>
+      <p class="where"><span class="label">Cite at —</span> "Why a voice is enough" claim.</p>
+    </li>
+
+    <li class="entry" id="cite-epley2007">
+      <span class="ref"><span class="citekey">epley2007</span>
+      Epley, N., Waytz, A. &amp; Cacioppo, J. T. (2007). <span class="title">On seeing human: a three-factor theory of anthropomorphism.</span> <span class="venue">Psychological Review, 114(4), 864–886.</span> <a class="doi" href="https://doi.org/10.1037/0033-295X.114.4.864">doi.org/10.1037/0033-295X.114.4.864</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Canonical psychological theory of when and why people anthropomorphise. Useful for predicting which users engage most.</p>
+      <p class="where"><span class="label">Cite at —</span> User-experience prediction; ethics.</p>
+    </li>
+
+    <li class="entry" id="cite-salles2020">
+      <span class="ref"><span class="citekey">salles2020</span>
+      Salles, A., Evers, K. &amp; Farisco, M. (2020). <span class="title">Anthropomorphism in AI.</span> <span class="venue">AJOB Neuroscience, 11(2), 88–95.</span> <a class="doi" href="https://doi.org/10.1080/21507740.2020.1740350">doi.org/10.1080/21507740.2020.1740350</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Critical view — anthropomorphism in AI as ethically risky, not neutral. The doc needs this counterweight.</p>
+      <p class="where"><span class="label">Cite at —</span> Critical reflection.</p>
+    </li>
+
+  </ol>
+</section>
+
+<section class="theme" id="t6">
+  <h2><span class="num">6.</span>Calm, ambient &amp; peripheral computing</h2>
+  <p class="theme-blurb">The interaction profile we want: mostly idle, periphery-of-attention, occasionally surfacing to the centre.</p>
+  <ol class="bib">
+
+    <li class="entry" id="cite-weiser1996">
+      <span class="ref"><span class="citekey">weiser1996</span>
+      Weiser, M. &amp; Brown, J. S. (1996). <span class="title">The coming age of calm technology.</span> <span class="venue">Xerox PARC.</span> <a class="doi" href="https://calmtech.com/papers/coming-age-calm-technology.html">calmtech.com</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Defines calm technology — periphery/centre attention shifts. Motivates "mostly idle, occasionally speaks" interaction profile.</p>
+      <p class="where"><span class="label">Cite at —</span> Interaction model.</p>
+    </li>
+
+    <li class="entry" id="cite-weiser1991">
+      <span class="ref"><span class="citekey">weiser1991</span>
+      Weiser, M. (1991). <span class="title">The computer for the 21st century.</span> <span class="venue">Scientific American, 265(3), 94–104.</span> <a class="doi" href="https://doi.org/10.1038/scientificamerican0991-94">doi.org/10.1038/scientificamerican0991-94</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> The ubicomp manifesto. Pair with Calm Tech for the ambient lineage.</p>
+      <p class="where"><span class="label">Cite at —</span> Background on ambient computing.</p>
+    </li>
+
+    <li class="entry" id="cite-pousman2006">
+      <span class="ref"><span class="citekey">pousman2006</span>
+      Pousman, Z. &amp; Stasko, J. (2006). <span class="title">A taxonomy of ambient information systems: four patterns of design.</span> <span class="venue">AVI 2006.</span> <a class="doi" href="https://doi.org/10.1145/1133265.1133277">doi.org/10.1145/1133265.1133277</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Taxonomy that lets us position plant-2-plant precisely on information capacity, notification level, fidelity and aesthetic emphasis.</p>
+      <p class="where"><span class="label">Cite at —</span> Design-space positioning.</p>
+    </li>
+
+    <li class="entry" id="cite-mccullough2004">
+      <span class="ref"><span class="citekey">mccullough2004</span>
+      McCullough, M. (2004). <span class="title">Digital Ground: Architecture, Pervasive Computing, and Environmental Knowing.</span> <span class="venue">MIT Press.</span> <a class="doi" href="https://mitpress.mit.edu/9780262633277/digital-ground/">mitpress.mit.edu</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Place-based pervasive computing — useful for the "plant lives in a room with other plants" spatial framing.</p>
+      <p class="where"><span class="label">Cite at —</span> Spatial/proximity routing rationale.</p>
+    </li>
+
+  </ol>
+</section>
+
+<section class="theme" id="t7">
+  <h2><span class="num">7.</span>Voice agents in the home</h2>
+  <p class="theme-blurb">What we know about how Alexa/Google Home actually get used, where conversational agents break, and the always-listening privacy concern.</p>
+  <ol class="bib">
+
+    <li class="entry" id="cite-porcheron2018">
+      <span class="ref"><span class="citekey">porcheron2018</span>
+      Porcheron, M., Fischer, J. E., Reeves, S. &amp; Sharples, S. (2018). <span class="title">Voice interfaces in everyday life.</span> <span class="venue">CHI 2018.</span> <a class="doi" href="https://doi.org/10.1145/3173574.3174214">doi.org/10.1145/3173574.3174214</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Ethnography of how Alexa/Google Home actually get used — turn-taking is awkward, often instrumental. Sets realistic expectations.</p>
+      <p class="where"><span class="label">Cite at —</span> Voice-UX section.</p>
+    </li>
+
+    <li class="entry" id="cite-lopatovska2019">
+      <span class="ref"><span class="citekey">lopatovska2019</span>
+      Lopatovska, I. et al. (2019). <span class="title">Talk to me: exploring user interactions with the Amazon Alexa.</span> <span class="venue">Journal of Librarianship and Information Science, 51(4), 984–997.</span> <a class="doi" href="https://doi.org/10.1177/0961000618759414">doi.org/10.1177/0961000618759414</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Empirical use-pattern study of a household voice agent — comparable baseline.</p>
+      <p class="where"><span class="label">Cite at —</span> Interaction-pattern expectations.</p>
+    </li>
+
+    <li class="entry" id="cite-lau2018">
+      <span class="ref"><span class="citekey">lau2018</span>
+      Lau, J., Zimmerman, B. &amp; Schaub, F. (2018). <span class="title">Alexa, are you listening? Privacy perceptions, concerns and privacy-seeking behaviors with smart speakers.</span> <span class="venue">CSCW 2018.</span> <a class="doi" href="https://doi.org/10.1145/3274371">doi.org/10.1145/3274371</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Defines the "always listening" privacy concern empirically. Mandatory citation for the on-device-VAD design choice.</p>
+      <p class="where"><span class="label">Cite at —</span> Privacy / on-device tier rationale.</p>
+    </li>
+
+    <li class="entry" id="cite-clark2019voice">
+      <span class="ref"><span class="citekey">clark2019voice</span>
+      Clark, L. et al. (2019). <span class="title">What makes a good conversation? Challenges in designing truly conversational agents.</span> <span class="venue">CHI 2019.</span> <a class="doi" href="https://doi.org/10.1145/3290605.3300705">doi.org/10.1145/3290605.3300705</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Articulates conversational-breakdown failure modes. Relevant to designing graceful failure for a plant that can't actually understand most of what it hears.</p>
+      <p class="where"><span class="label">Cite at —</span> Failure-mode / fallback design.</p>
+    </li>
+
+  </ol>
+</section>
+
+<section class="theme" id="t8">
+  <h2><span class="num">8.</span>Speculative &amp; critical design</h2>
+  <p class="theme-blurb">Framing this as artifact-as-argument — research-through-design, not product.</p>
+  <ol class="bib">
+
+    <li class="entry" id="cite-dunne2013">
+      <span class="ref"><span class="citekey">dunne2013</span>
+      Dunne, A. &amp; Raby, F. (2013). <span class="title">Speculative Everything: Design, Fiction, and Social Dreaming.</span> <span class="venue">MIT Press.</span> <a class="doi" href="https://mitpress.mit.edu/9780262019842/speculative-everything/">mitpress.mit.edu</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Defines speculative design — artifact-as-argument. The right framing for plant-2-plant.</p>
+      <p class="where"><span class="label">Cite at —</span> Project framing / contribution-type statement.</p>
+    </li>
+
+    <li class="entry" id="cite-bleecker2009">
+      <span class="ref"><span class="citekey">bleecker2009</span>
+      Bleecker, J. (2009). <span class="title">Design Fiction: A Short Essay on Design, Science, Fact and Fiction.</span> <span class="venue">Near Future Laboratory.</span> <a class="doi" href="https://blog.nearfuturelaboratory.com/2009/03/17/design-fiction-a-short-essay-on-design-science-fact-and-fiction/">nearfuturelaboratory.com</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Canonical design-fiction essay. Cite when calling the system a "diegetic prototype."</p>
+      <p class="where"><span class="label">Cite at —</span> Framing.</p>
+    </li>
+
+    <li class="entry" id="cite-bardzell2013">
+      <span class="ref"><span class="citekey">bardzell2013</span>
+      Bardzell, J. &amp; Bardzell, S. (2013). <span class="title">What is "critical" about critical design?</span> <span class="venue">CHI 2013.</span> <a class="doi" href="https://doi.org/10.1145/2470654.2466451">doi.org/10.1145/2470654.2466451</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Methodological grounding for critical design within HCI. Useful when defending the project at CHI/DIS.</p>
+      <p class="where"><span class="label">Cite at —</span> Methods / contribution framing.</p>
+    </li>
+
+  </ol>
+</section>
+
+<section class="theme" id="t9">
+  <h2><span class="num">9.</span>Edge AI &amp; on-device speech</h2>
+  <p class="theme-blurb">Practical references for the implementation tier — what makes the kit-per-plant economics work.</p>
+  <ol class="bib">
+
+    <li class="entry" id="cite-radford2022whisper">
+      <span class="ref"><span class="citekey">radford2022whisper</span>
+      Radford, A. et al. (2022). <span class="title">Robust speech recognition via large-scale weak supervision.</span> <span class="venue">arXiv.</span> <a class="doi" href="https://arxiv.org/abs/2212.04356">arXiv:2212.04356</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> The Whisper paper underlying whisper.cpp. Citation for the STT tier.</p>
+      <p class="where"><span class="label">Cite at —</span> Implementation tier; STT subsystem.</p>
+    </li>
+
+    <li class="entry" id="cite-whispercpp">
+      <span class="ref"><span class="citekey">whispercpp</span>
+      Gerganov, G. (2022–). <span class="title">whisper.cpp: port of OpenAI's Whisper model in C/C++.</span> <span class="venue">GitHub.</span> <a class="doi" href="https://github.com/ggerganov/whisper.cpp">github.com/ggerganov/whisper.cpp</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Practical reference for offline STT on commodity / edge hardware. The concrete implementation choice.</p>
+      <p class="where"><span class="label">Cite at —</span> Implementation tier.</p>
+    </li>
+
+    <li class="entry" id="cite-piper">
+      <span class="ref"><span class="citekey">piper</span>
+      Hansen, M. (2023–). <span class="title">Piper: a fast, local neural text-to-speech system.</span> <span class="venue">GitHub.</span> <a class="doi" href="https://github.com/rhasspy/piper">github.com/rhasspy/piper</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Local TTS suitable for Pi/edge — pairs with Whisper for fully on-device voice.</p>
+      <p class="where"><span class="label">Cite at —</span> Implementation tier; TTS subsystem.</p>
+    </li>
+
+    <li class="entry" id="cite-ollama">
+      <span class="ref"><span class="citekey">ollama</span>
+      Ollama (2023–). <span class="title">Ollama: get up and running with large language models locally.</span> <span class="venue">Project page.</span> <a class="doi" href="https://ollama.com/">ollama.com</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Local LLM runtime — supports the "no cloud required" tier of the hive.</p>
+      <p class="where"><span class="label">Cite at —</span> Implementation tier; hive runtime.</p>
+    </li>
+
+    <li class="entry" id="cite-warden2019tinyml">
+      <span class="ref"><span class="citekey">warden2019tinyml</span>
+      Warden, P. &amp; Situnayake, D. (2019). <span class="title">TinyML: Machine Learning with TensorFlow Lite on Arduino and Ultra-Low-Power Microcontrollers.</span> <span class="venue">O'Reilly.</span> <a class="doi" href="https://www.oreilly.com/library/view/tinyml/9781492052036/">oreilly.com</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Reference text for ML on microcontrollers (ESP32-class). Useful for the "wake-word on the plant kit itself" claim.</p>
+      <p class="where"><span class="label">Cite at —</span> Sensing-tier hardware discussion.</p>
+    </li>
+
+    <li class="entry" id="cite-banbury2021mlperftiny">
+      <span class="ref"><span class="citekey">banbury2021mlperftiny</span>
+      Banbury, C. et al. (2021). <span class="title">MLPerf Tiny benchmark.</span> <span class="venue">NeurIPS Datasets &amp; Benchmarks.</span> <a class="doi" href="https://arxiv.org/abs/2106.07597">arXiv:2106.07597</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Establishes that meaningful ML inference on microcontrollers is now standardised and benchmarked. Backstops feasibility claims for the on-plant tier.</p>
+      <p class="where"><span class="label">Cite at —</span> Feasibility footnote in implementation section.</p>
+    </li>
+
+  </ol>
+</section>
+
+<section class="theme" id="t10">
+  <h2><span class="num">10.</span>Adjacent &amp; complicating literature</h2>
+  <p class="theme-blurb">Critiques, counter-arguments, and depth references — included so the doc remains intellectually honest rather than persuasive only.</p>
+  <ol class="bib">
+
+    <li class="entry" id="cite-taiz2019">
+      <span class="ref"><span class="citekey">taiz2019</span>
+      Taiz, L. et al. (2019). <span class="title">Plants neither possess nor require consciousness.</span> <span class="venue">Trends in Plant Science, 24(8), 677–687.</span> <a class="doi" href="https://doi.org/10.1016/j.tplants.2019.05.008">doi.org/10.1016/j.tplants.2019.05.008</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> The major <em>critique</em> of plant-neurobiology claims. Cite for intellectual honesty — the science underpinning "plant personality" is contested.</p>
+      <p class="where"><span class="label">Cite at —</span> Honesty footnote near first persona claim.</p>
+    </li>
+
+    <li class="entry" id="cite-hall2011">
+      <span class="ref"><span class="citekey">hall2011</span>
+      Hall, M. (2011). <span class="title">Plants as Persons: A Philosophical Botany.</span> <span class="venue">SUNY Press.</span> <a class="doi" href="https://sunypress.edu/Books/P/Plants-as-Persons">sunypress.edu</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Philosophical case for plant moral standing. Strongest counterweight if a reviewer dismisses the project as cute anthropomorphism.</p>
+      <p class="where"><span class="label">Cite at —</span> Ethics / plant-rights paragraph.</p>
+    </li>
+
+    <li class="entry" id="cite-marder2013">
+      <span class="ref"><span class="citekey">marder2013</span>
+      Marder, M. (2013). <span class="title">Plant-Thinking: A Philosophy of Vegetal Life.</span> <span class="venue">Columbia University Press.</span> <a class="doi" href="https://cup.columbia.edu/book/plant-thinking/9780231161244">cup.columbia.edu</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Continental-philosophy companion to Mancuso — argues for taking vegetal existence seriously on its own terms.</p>
+      <p class="where"><span class="label">Cite at —</span> Framing / ethics.</p>
+    </li>
+
+    <li class="entry" id="cite-haraway2016">
+      <span class="ref"><span class="citekey">haraway2016</span>
+      Haraway, D. J. (2016). <span class="title">Staying with the Trouble: Making Kin in the Chthulucene.</span> <span class="venue">Duke University Press.</span> <a class="doi" href="https://www.dukeupress.edu/staying-with-the-trouble">dukeupress.edu</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Reference for multispecies / kin-making thinking that more-than-human HCI draws from.</p>
+      <p class="where"><span class="label">Cite at —</span> Framing of "designing with plants as kin."</p>
+    </li>
+
+    <li class="entry" id="cite-tsing2015">
+      <span class="ref"><span class="citekey">tsing2015</span>
+      Tsing, A. L. (2015). <span class="title">The Mushroom at the End of the World.</span> <span class="venue">Princeton University Press.</span> <a class="doi" href="https://press.princeton.edu/books/paperback/9780691178325/the-mushroom-at-the-end-of-the-world">press.princeton.edu</a></span>
+      <p class="relevance"><span class="label">Relevance —</span> Multispecies ethnography that's now standard reading in more-than-human design.</p>
+      <p class="where"><span class="label">Cite at —</span> Theoretical framing.</p>
+    </li>
+
+  </ol>
+</section>
+
+<section class="titles" id="titles">
+  <h2><span class="num">★</span>Future paper / poster / demo titles</h2>
+  <p class="theme-blurb">Seven distinct angles to pick from when the project is mature enough to write up. Venues match the angle, not the other way round.</p>
+  <ol>
+    <li>
+      <span class="venue-tag">DIS short</span>
+      <span class="ptitle">"It's been three days": designing care-deficit speech acts for a houseplant LLM agent.</span>
+      <span class="angle">Narrow focus on the moment a plant first complains; analyse user reactions and complaint phrasings across personas.</span>
+    </li>
+    <li>
+      <span class="venue-tag">TEI demo</span>
+      <span class="ptitle">Plant-2-Plant: a kit-per-pot toolkit for embodied LLM personas in domestic ecologies.</span>
+      <span class="angle">Hands-on demo of the hardware kit + hive; attendees onboard a new plant in five minutes.</span>
+    </li>
+    <li>
+      <span class="venue-tag">alt.CHI</span>
+      <span class="ptitle">Whose voice is the basil's? Authorship, persona, and the ethics of speaking on a plant's behalf.</span>
+      <span class="angle">Critical-reflective piece interrogating who actually authors the persona an LLM gives a plant.</span>
+    </li>
+    <li>
+      <span class="venue-tag">NIME</span>
+      <span class="ptitle">Mycelial MQTT: proximity-routed plant-to-plant utterances as a generative ambient soundscape.</span>
+      <span class="angle">Frame inter-plant chatter as long-form generative composition; report on a gallery installation.</span>
+    </li>
+    <li>
+      <span class="venue-tag">C&amp;C</span>
+      <span class="ptitle">Personality from photoperiod: deriving stable LLM personas from species biology.</span>
+      <span class="angle">Methods-forward paper on the persona-derivation pipeline (species profile → trait vector → system prompt) and perceived consistency.</span>
+    </li>
+    <li>
+      <span class="venue-tag">CHI LBW</span>
+      <span class="ptitle">Calm conversational agents: speech as a peripheral cue in always-on domestic AI.</span>
+      <span class="angle">Position plant-2-plant against the smart-speaker baseline; measure attention and interruption costs.</span>
+    </li>
+    <li>
+      <span class="venue-tag">ISEA</span>
+      <span class="ptitle">A Nation of Plants, Networked: speculative governance among twelve LLM-personified houseplants.</span>
+      <span class="angle">Art/theory piece building on Mancuso's <em>Nation of Plants</em>; the plants hold a "council" via MQTT and we publish the transcripts.</span>
+    </li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  plant-2-plant · literature · sclab workspace · v0 draft
+</footer>
+
+</body>
+</html>
