@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>plant-2-plant — studio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="studio.css" />
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <h1>plant-2-plant <span class="leaf">·</span> studio</h1>
+    <div class="tag">v0.1 · local hive</div>
+    <div class="key-status" id="keyStatus">checking…</div>
+  </div>
+
+  <div class="plant-list" id="plantList">
+    <div class="plant-list-header">your plants</div>
+    <div id="plantCards"></div>
+    <button class="add-plant" onclick="openNewPlantModal()">
+      <i class="fa-solid fa-plus"></i> Add a plant
+    </button>
+  </div>
+
+  <div class="sidebar-footer">
+    <a href="index.html"><i class="fa-solid fa-compass"></i> concept</a>
+    <a href="literature.html"><i class="fa-solid fa-book"></i> literature</a>
+    <a href="literature.html#titles"><i class="fa-solid fa-feather-pointed"></i> paper titles</a>
+  </div>
+</aside>
+
+<main id="main">
+  <button class="menu-toggle" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+  <div id="mainContent"><!-- rendered by JS --></div>
+</main>
+
+<div id="modalRoot"></div>
+<div class="toast-rail" id="toastRail"></div>
+
+<script src="studio.js"></script>
+</body>
+</html>

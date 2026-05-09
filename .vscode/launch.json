@@ -2,18 +2,32 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Serve on LAN (for phone)",
+      "name": "Hive (server.py)",
       "type": "node-terminal",
       "request": "launch",
-      "command": "echo \"\\nMobile URL: http://$(ipconfig getifaddr en0 || ipconfig getifaddr en1):4450\\nLocal URL:  http://localhost:4450\\n\" && python3 -m http.server 4450",
+      "command": "echo \"\\nplant-2-plant hive starting...\\n  Studio:  http://localhost:4450/studio.html\\n  Concept: http://localhost:4450/index.html\\n\" && python3 server.py",
       "cwd": "${workspaceFolder}"
     },
     {
-      "name": "Launch Chrome (server must be running)",
+      "name": "Open Studio in Chrome (hive must be running)",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:4450",
+      "url": "http://localhost:4450/studio.html",
       "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Open Concept in Chrome (hive must be running)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:4450/index.html",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Static-only server (no LLM, no plant API)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "echo \"\\nStatic only on http://localhost:4450 (concept + literature only)\\n\" && python3 -m http.server 4450",
+      "cwd": "${workspaceFolder}"
     }
   ]
 }
