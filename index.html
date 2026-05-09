@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>plant-2-plant — concept sketch</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 <style>
   :root {
     --bg:        #f4ecdc;
@@ -90,10 +91,28 @@
     flex-shrink: 0;
   }
   .nav-link.active .num { color: var(--clay); }
+  .nav-link .icon {
+    width: 16px; text-align: center;
+    color: var(--leaf); font-size: 13px;
+    flex-shrink: 0;
+  }
+  .nav-link.active .icon,
+  .nav-link:hover .icon { color: var(--leaf-deep); }
   .nav-link .label {
     font-size: 14.5px;
     line-height: 1.35;
   }
+
+  /* Inline icons in callouts, pills, card headings, footer */
+  .pill .icon { margin-right: 5px; font-size: 11px; opacity: 0.85; }
+  .card h3 .icon { color: var(--clay); margin-right: 6px; font-size: 13px; }
+  .decision strong .icon,
+  .open strong .icon,
+  .honesty strong .icon { margin-right: 5px; font-size: 13px; }
+  .sidebar-footer a .icon {
+    color: var(--leaf); margin-right: 6px; width: 14px; text-align: center;
+  }
+  .sidebar-footer a:hover .icon { color: var(--leaf-deep); }
 
   .sidebar-footer {
     padding: 14px 22px 18px;
@@ -301,24 +320,24 @@
   </div>
 
   <nav class="side-nav" id="sideNav">
-    <button class="nav-link" data-view="framing"    onclick="switchView('framing')">    <span class="num">0</span> <span class="label">Framing</span></button>
-    <button class="nav-link" data-view="idea"       onclick="switchView('idea')">       <span class="num">1</span> <span class="label">The idea</span></button>
-    <button class="nav-link" data-view="identity"   onclick="switchView('identity')">   <span class="num">2</span> <span class="label">Identity &amp; personality</span></button>
-    <button class="nav-link" data-view="senses"     onclick="switchView('senses')">     <span class="num">3</span> <span class="label">Senses</span></button>
-    <button class="nav-link" data-view="behaviour"  onclick="switchView('behaviour')">  <span class="num">4</span> <span class="label">Behaviour &amp; triggers</span></button>
-    <button class="nav-link" data-view="peers"      onclick="switchView('peers')">      <span class="num">5</span> <span class="label">Plant-to-plant</span></button>
-    <button class="nav-link" data-view="lights"     onclick="switchView('lights')">     <span class="num">6</span> <span class="label">Light signalling</span></button>
-    <button class="nav-link" data-view="memory"     onclick="switchView('memory')">     <span class="num">7</span> <span class="label">Memory</span></button>
-    <button class="nav-link" data-view="kits"       onclick="switchView('kits')">       <span class="num">8</span> <span class="label">Kit tiers</span></button>
-    <button class="nav-link" data-view="hive"       onclick="switchView('hive')">       <span class="num">9</span> <span class="label">The hive</span></button>
-    <button class="nav-link" data-view="roadmap"    onclick="switchView('roadmap')">    <span class="num">10</span> <span class="label">Roadmap</span></button>
-    <button class="nav-link" data-view="reflection" onclick="switchView('reflection')"> <span class="num">11</span> <span class="label">Reflection</span></button>
-    <button class="nav-link" data-view="papers"     onclick="switchView('papers')">     <span class="num">★</span> <span class="label">Where to publish</span></button>
+    <button class="nav-link" data-view="framing"    onclick="switchView('framing')">    <span class="num">0</span>  <i class="icon fa-solid fa-compass"></i>        <span class="label">Framing</span></button>
+    <button class="nav-link" data-view="idea"       onclick="switchView('idea')">       <span class="num">1</span>  <i class="icon fa-solid fa-seedling"></i>       <span class="label">The idea</span></button>
+    <button class="nav-link" data-view="identity"   onclick="switchView('identity')">   <span class="num">2</span>  <i class="icon fa-solid fa-mask"></i>           <span class="label">Identity &amp; personality</span></button>
+    <button class="nav-link" data-view="senses"     onclick="switchView('senses')">     <span class="num">3</span>  <i class="icon fa-solid fa-tower-broadcast"></i><span class="label">Senses</span></button>
+    <button class="nav-link" data-view="behaviour"  onclick="switchView('behaviour')">  <span class="num">4</span>  <i class="icon fa-solid fa-bolt"></i>           <span class="label">Behaviour &amp; triggers</span></button>
+    <button class="nav-link" data-view="peers"      onclick="switchView('peers')">      <span class="num">5</span>  <i class="icon fa-solid fa-network-wired"></i>  <span class="label">Plant-to-plant</span></button>
+    <button class="nav-link" data-view="lights"     onclick="switchView('lights')">     <span class="num">6</span>  <i class="icon fa-solid fa-lightbulb"></i>      <span class="label">Light signalling</span></button>
+    <button class="nav-link" data-view="memory"     onclick="switchView('memory')">     <span class="num">7</span>  <i class="icon fa-solid fa-brain"></i>          <span class="label">Memory</span></button>
+    <button class="nav-link" data-view="kits"       onclick="switchView('kits')">       <span class="num">8</span>  <i class="icon fa-solid fa-microchip"></i>      <span class="label">Kit tiers</span></button>
+    <button class="nav-link" data-view="hive"       onclick="switchView('hive')">       <span class="num">9</span>  <i class="icon fa-solid fa-server"></i>         <span class="label">The hive</span></button>
+    <button class="nav-link" data-view="roadmap"    onclick="switchView('roadmap')">    <span class="num">10</span> <i class="icon fa-solid fa-route"></i>          <span class="label">Roadmap</span></button>
+    <button class="nav-link" data-view="reflection" onclick="switchView('reflection')"> <span class="num">11</span> <i class="icon fa-solid fa-comments"></i>       <span class="label">Reflection</span></button>
+    <button class="nav-link" data-view="papers"     onclick="switchView('papers')">     <span class="num">★</span>  <i class="icon fa-solid fa-feather-pointed"></i><span class="label">Where to publish</span></button>
   </nav>
 
   <div class="sidebar-footer">
-    <a href="literature.html">literature →</a>
-    <a href="literature.html#titles">paper titles →</a>
+    <a href="literature.html"><i class="icon fa-solid fa-book"></i>literature</a>
+    <a href="literature.html#titles"><i class="icon fa-solid fa-file-lines"></i>paper titles</a>
     <p class="meta">sclab workspace</p>
   </div>
 </aside>
@@ -336,7 +355,7 @@
         plant-2-plant is a <strong>speculative design</strong> project <a class="cite" href="literature.html#cite-dunne2013">[42]</a> — an artifact-as-argument, closer to a diegetic prototype <a class="cite" href="literature.html#cite-bleecker2009">[43]</a> than a product. It sits inside the more-than-human design tradition <a class="cite" href="literature.html#cite-giaccardi2020">[18]</a><a class="cite" href="literature.html#cite-coulton2021">[19]</a>, asking what happens when the addressed subject of the interface is the plant rather than the human <a class="cite" href="literature.html#cite-smith2017">[21]</a><a class="cite" href="literature.html#cite-liu2018">[20]</a>. The contribution is an arrangement: hardware kits, an LLM hive, and a set of personas grounded in real species biology.
       </p>
       <div class="honesty">
-        <strong>Honesty footnote.</strong> Whether plants "have" cognition or experience is contested in plant science <a class="cite" href="literature.html#cite-mancuso2015">[2]</a><a class="cite" href="literature.html#cite-taiz2019">[51]</a>. We do not need to settle that to proceed: an LLM persona is performance, not identity <a class="cite" href="literature.html#cite-shanahan2023">[26]</a>. We borrow the shape of the science to compose voices we find legible — and we say so.
+        <strong><i class="icon fa-solid fa-scale-balanced"></i>Honesty footnote.</strong> Whether plants "have" cognition or experience is contested in plant science <a class="cite" href="literature.html#cite-mancuso2015">[2]</a><a class="cite" href="literature.html#cite-taiz2019">[51]</a>. We do not need to settle that to proceed: an LLM persona is performance, not identity <a class="cite" href="literature.html#cite-shanahan2023">[26]</a>. We borrow the shape of the science to compose voices we find legible — and we say so.
       </div>
     </div>
   </div>
@@ -389,7 +408,7 @@
         The hive feeds this card to the LLM with a personality-derivation prompt. Out comes a <strong>personality profile</strong>: a voice (TTS preset), a tone (calm / sarcastic / anxious / regal), sleep/wake hours derived from the species' photoperiod, things that scare it, things it loves, what it sounds like when it's stressed. Persona stability over time is borrowed from the generative-agents architecture <a class="cite" href="literature.html#cite-park2023">[25]</a>.
       </p>
       <div class="decision">
-        <strong>Decision:</strong> personality is <em>derived once</em> at plant onboarding and cached as a system prompt. Memory grows; character does not. This matches the role-play framing — coherence over weeks comes from a stable role, not from the model "becoming" the plant <a class="cite" href="literature.html#cite-shanahan2023">[26]</a>.
+        <strong><i class="icon fa-solid fa-circle-check"></i>Decision:</strong> personality is <em>derived once</em> at plant onboarding and cached as a system prompt. Memory grows; character does not. This matches the role-play framing — coherence over weeks comes from a stable role, not from the model "becoming" the plant <a class="cite" href="literature.html#cite-shanahan2023">[26]</a>.
       </div>
     </div>
   </div>
@@ -402,22 +421,22 @@
 
       <div class="grid">
         <div class="card">
-          <h3>Hearing</h3>
+          <h3><i class="icon fa-solid fa-ear-listen"></i>Hearing</h3>
           <p>I2S MEMS mic on the kit. Voice-activity detection (VAD) on-device; only voiced audio is shipped upstream for STT.</p>
           <div class="why">VAD on-device because shipping continuous room audio to the hive recreates exactly the smart-speaker privacy problem <a class="cite" href="literature.html#cite-lau2018">[40]</a>. TinyML on ESP32-class boards makes wake-word and VAD feasible at the edge <a class="cite" href="literature.html#cite-warden2019tinyml">[49]</a><a class="cite" href="literature.html#cite-banbury2021mlperftiny">[50]</a>.</div>
         </div>
         <div class="card">
-          <h3>Speech</h3>
+          <h3><i class="icon fa-solid fa-volume-high"></i>Speech</h3>
           <p>I2S DAC + small speaker. Text-to-speech rendered by the hive (Piper <a class="cite" href="literature.html#cite-piper">[47]</a> for local, ElevenLabs/cloud as alternative), streamed back as PCM.</p>
           <div class="why">Per-plant voice preset is part of the personality profile.</div>
         </div>
         <div class="card">
-          <h3>Sight (optional)</h3>
+          <h3><i class="icon fa-solid fa-eye"></i>Sight (optional)</h3>
           <p>Camera + OpenCV face / motion detection runs <em>locally on the kit</em> for plants on the Pi tier. Only the event ("face nearby", "motion") is published — never the frames.</p>
           <div class="why">Same privacy logic as hearing — events leave the kit, raw sensing does not.</div>
         </div>
         <div class="card">
-          <h3>Climate (optional)</h3>
+          <h3><i class="icon fa-solid fa-temperature-half"></i>Climate (optional)</h3>
           <p>Kiwrious sensor over USB serial (WebSerial in dev, pyserial on Pi). Each plant compares readings to its own comfort + critical bands.</p>
           <div class="why">Climate drift is the trigger that grounds the loudest claim — that drought stress is communicable <a class="cite" href="literature.html#cite-khait2023">[1]</a>.</div>
         </div>
@@ -433,11 +452,11 @@
 
       <p>A plant is mostly idle. This is the design — the calm-tech profile <a class="cite" href="literature.html#cite-weiser1996">[34]</a> rather than the always-listening assistant <a class="cite" href="literature.html#cite-porcheron2018">[38]</a>. It wakes when something interesting happens:</p>
       <ul>
-        <li><span class="pill">voice</span> human voice detected nearby (VAD + STT keyword)</li>
-        <li><span class="pill">presence</span> face / motion detected (vision-tier plants only)</li>
-        <li><span class="pill">climate</span> temperature or humidity crosses the comfort or critical band</li>
-        <li><span class="pill">schedule</span> watering interval elapsed; circadian wake/sleep transitions</li>
-        <li><span class="pill">peer</span> a nearby plant said something it wants to react to</li>
+        <li><span class="pill"><i class="icon fa-solid fa-microphone"></i>voice</span> human voice detected nearby (VAD + STT keyword)</li>
+        <li><span class="pill"><i class="icon fa-solid fa-person"></i>presence</span> face / motion detected (vision-tier plants only)</li>
+        <li><span class="pill"><i class="icon fa-solid fa-temperature-half"></i>climate</span> temperature or humidity crosses the comfort or critical band</li>
+        <li><span class="pill"><i class="icon fa-solid fa-clock"></i>schedule</span> watering interval elapsed; circadian wake/sleep transitions</li>
+        <li><span class="pill"><i class="icon fa-solid fa-leaf"></i>peer</span> a nearby plant said something it wants to react to</li>
       </ul>
       <p>Mood is a slow-moving variable, not a per-utterance dice roll, drawing on tangible-mood precedent <a class="cite" href="literature.html#cite-kim2021plant">[17]</a>:</p>
       <ul>
@@ -447,7 +466,7 @@
         <li>Adjustable knob: a global "funny ↔ serious" slider in the hive UI.</li>
       </ul>
       <div class="decision">
-        <strong>Decision:</strong> mood feeds into the LLM call as a short modifier appended to the personality prompt — not as a separate model. One LLM round-trip per utterance, max.
+        <strong><i class="icon fa-solid fa-circle-check"></i>Decision:</strong> mood feeds into the LLM call as a short modifier appended to the personality prompt — not as a separate model. One LLM round-trip per utterance, max.
       </div>
     </div>
   </div>
@@ -465,7 +484,7 @@
         When plant B receives plant A's utterance, the hive decides — based on B's personality and current mood — whether B reacts at all. Most of the time it shouldn't. When it does, the response is generated with both A's utterance and B's recent context in the prompt. The mycorrhizal-network framing <a class="cite" href="literature.html#cite-simard1997">[5]</a><a class="cite" href="literature.html#cite-simard2018">[6]</a> is a useful analogy for the routing layer: a shared substrate carrying signals across an ecology.
       </p>
       <div class="decision">
-        <strong>Decision:</strong> a "reply or stay quiet?" gate runs as a tiny LLM call (or a heuristic) before the full generative call, to keep cost down and prevent chatter loops.
+        <strong><i class="icon fa-solid fa-circle-check"></i>Decision:</strong> a "reply or stay quiet?" gate runs as a tiny LLM call (or a heuristic) before the full generative call, to keep cost down and prevent chatter loops.
       </div>
     </div>
   </div>
@@ -480,7 +499,7 @@
         The plant's voice is one channel; the room's lighting is another. The hive holds Hue bridge credentials and exposes a small action vocabulary: <code>blink(red, 2x)</code>, <code>fade_to(orange, 5s)</code>, <code>pulse(blue)</code>. Plants don't talk to Hue directly — they emit intents like "I'm parched" and the hive maps them to a light cue based on a per-room policy. Light becomes the ambient channel that <em>doesn't</em> interrupt — the speech channel for moments worth interrupting <a class="cite" href="literature.html#cite-pousman2006">[36]</a>.
       </p>
       <div class="decision">
-        <strong>Decision:</strong> Hue is a <em>hive responsibility</em>, not a per-plant one. Plants stay simple; the hive owns external integrations.
+        <strong><i class="icon fa-solid fa-circle-check"></i>Decision:</strong> Hue is a <em>hive responsibility</em>, not a per-plant one. Plants stay simple; the hive owns external integrations.
       </div>
     </div>
   </div>
@@ -495,7 +514,7 @@
         Each plant has a small per-instance memory store (the hive holds it; the kit is stateless). Things it has heard from people, things peer plants have shared, notable climate events. Periodically the hive runs a summarisation pass — the reflection step from generative agents <a class="cite" href="literature.html#cite-park2023">[25]</a> — distilling raw memory into a compact "what I know now" block that gets prepended to the next LLM call <a class="cite" href="literature.html#cite-zhong2024memorybank">[27]</a>. The plant <em>grows</em> across weeks without blowing the prompt budget. Crucially, the personality prompt itself is not rewritten; only memory grows.
       </p>
       <div class="open">
-        <strong>Open:</strong> how much of overheard human speech do we actually persist? Default conservative — keywords + topic summaries only, no raw transcripts older than N hours <a class="cite" href="literature.html#cite-lau2018">[40]</a>. Needs an explicit privacy policy before any deployment outside the workshop.
+        <strong><i class="icon fa-solid fa-circle-question"></i>Open:</strong> how much of overheard human speech do we actually persist? Default conservative — keywords + topic summaries only, no raw transcripts older than N hours <a class="cite" href="literature.html#cite-lau2018">[40]</a>. Needs an explicit privacy policy before any deployment outside the workshop.
       </div>
     </div>
   </div>
@@ -535,7 +554,7 @@
         The kit's job is sensing, audio I/O, and local VAD. <strong>No LLM on the kit.</strong> No STT or TTS on the kit. That keeps T1 cheap and means a single $15 board can bring a plant to life. The "I/O plant" toolkit lineage <a class="cite" href="literature.html#cite-kuribayashi2007">[14]</a> is what we extend here — a kit-per-pot rather than a single shared appliance.
       </p>
       <div class="open">
-        <strong>Open:</strong> Kiwrious connects via WebSerial (browser) or USB serial (Pi). On an ESP32 in T2, USB host is awkward — easier to substitute a BME280 over I²C for that tier and keep Kiwrious for browser-side dev / Pi-tier plants.
+        <strong><i class="icon fa-solid fa-circle-question"></i>Open:</strong> Kiwrious connects via WebSerial (browser) or USB serial (Pi). On an ESP32 in T2, USB host is awkward — easier to substitute a BME280 over I²C for that tier and keep Kiwrious for browser-side dev / Pi-tier plants.
       </div>
     </div>
   </div>
@@ -578,7 +597,7 @@
         <li><code>room/{id}/light</code> — Hue intents</li>
       </ul>
       <div class="decision">
-        <strong>Decision:</strong> MQTT, not custom WebSockets. Cheap on ESP32, native publish/subscribe semantics, easy to inspect with <code>mosquitto_sub</code> while developing.
+        <strong><i class="icon fa-solid fa-circle-check"></i>Decision:</strong> MQTT, not custom WebSockets. Cheap on ESP32, native publish/subscribe semantics, easy to inspect with <code>mosquitto_sub</code> while developing.
       </div>
     </div>
   </div>
